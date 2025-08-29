@@ -37,7 +37,7 @@ export default function Footer() {
         <div>
           <h4 className="text-sm font-semibold">Síguenos</h4>
           <div className="mt-3 flex gap-3 text-muted-foreground">
-            <a aria-label="Instagram" href="#" className="hover:text-foreground"><Instagram className="h-5 w-5" /></a>
+            <a aria-label="Instagram" href="https://www.instagram.com/me_store_co" target="_blank" rel="noreferrer" className="hover:text-foreground"><Instagram className="h-5 w-5" /></a>
             <a aria-label="Twitter" href="#" className="hover:text-foreground"><Twitter className="h-5 w-5" /></a>
             <a aria-label="Facebook" href="#" className="hover:text-foreground"><Facebook className="h-5 w-5" /></a>
           </div>
