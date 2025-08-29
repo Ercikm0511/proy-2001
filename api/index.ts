@@ -1,17 +1,38 @@
-import { createServer } from "../server";
+import express from "express";
+import cors from "cors";
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import path from 'path';
 import fs from 'fs';
 
-const app = createServer();
+const app = express();
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Handle API routes
-  if (req.url?.startsWith('/api/')) {
-    return app(req, res);
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// API routes
+app.get("/api/ping", (_req, res) => {
+  const ping = process.env.PING_MESSAGE ?? "ping";
+  res.json({ message: ping });
+});
+
+app.get("/api/demo", (_req, res) => {
+  res.json({ message: "Demo endpoint working!" });
+});
+
+app.post("/api/webhook", (req, res) => {
+  console.log("Webhook received:", req.body);
+  res.sendStatus(200);
+});
+
+// Serve static files for non-API routes
+app.get("*", (req, res) => {
+  // Don't serve index.html for API routes
+  if (req.path.startsWith("/api/")) {
+    return res.status(404).json({ error: "API endpoint not found" });
   }
 
-  // For non-API routes, serve the built SPA
   try {
     const indexPath = path.join(process.cwd(), 'dist', 'spa', 'index.html');
     
@@ -39,6 +60,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   } catch (error) {
     console.error('Error serving frontend:', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).json({ 
+      error: 'Internal Server Error',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
   }
-} 
+});
+
+export default app; 
