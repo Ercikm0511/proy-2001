@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
+import { useAuth } from "@/state/auth";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
@@ -10,6 +11,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
