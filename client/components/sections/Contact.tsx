@@ -16,7 +16,7 @@ export default function Contact() {
         <div className="overflow-hidden rounded-2xl border">
           <iframe
             title="Ubicación M’E Store"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60118.65234323572!2d-99.2410845089997!3d19.43260773484456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff36f23d5799%3A0xdefd41e4b18a2393!2sPolanco%2C%20Mexico%20City!5e0!3m2!1sen!2smx!4v1700000000000!5m2!1sen!2smx"
+            src="https://www.google.com/maps?q=Cra.+81+%2343-72,+Local+1158+Laureles+-+Estadio,+Medell%C3%ADn,+Laureles,+Medell%C3%ADn,+Antioquia&output=embed"
             width="100%"
             height="380"
             loading="lazy"
