@@ -40,6 +40,11 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <a href="#tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
           <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
           <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
+          {user ? (
+            <a href="/admin" className="text-sm text-muted-foreground hover:text-foreground">Admin</a>
+          ) : (
+            <a href="/admin/login" className="text-sm text-muted-foreground hover:text-foreground">Acceso</a>
+          )}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <button
