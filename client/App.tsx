@@ -1,134 +1,189 @@
 import "./global.css";
-
-import { Toaster } from "@/components/ui/toaster";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Thanks from "./pages/Thanks";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import WhatsappFab from "@/components/sections/WhatsappFab";
-import { useEffect, useMemo, useState } from "react";
-import { CartProvider } from "@/state/cart";
-import CartPanel from "@/components/cart/CartPanel";
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from "react-router-dom";
 
-const queryClient = new QueryClient();
-
-function applyTheme(mode: "light" | "dark") {
-  const root = document.documentElement;
-  root.classList.add("theme-transition");
-  window.setTimeout(() => root.classList.remove("theme-transition"), 600);
-  if (mode === "dark") root.classList.add("dark");
-  else root.classList.remove("dark");
-}
-
-const App = () => {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+// ---------- Modo Día/Noche Automático ----------
+function useDayNightMode() {
+  const [isDay, setIsDay] = useState(true);
 
   useEffect(() => {
-    const saved = (localStorage.getItem("theme") as "light" | "dark" | null);
-    if (saved) {
-      setTheme(saved);
-      applyTheme(saved);
-      return;
-    }
-
     const hour = new Date().getHours();
-    const mql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
-    const initial: "light" | "dark" = mql && typeof mql.matches === "boolean"
-      ? (mql.matches ? "dark" : (hour >= 6 && hour <= 18 ? "light" : "dark"))
-      : (hour >= 6 && hour <= 18 ? "light" : "dark");
-
-    setTheme(initial);
-    applyTheme(initial);
-
-    let timeoutId: number | null = null;
-    const onChange = (e: MediaQueryListEvent) => {
-      if (localStorage.getItem("theme")) return; // manual override exists
-      const next = e.matches ? "dark" : "light";
-      setTheme(next);
-      applyTheme(next);
-    };
-
-    if (mql) {
-      // @ts-ignore Safari
-      mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
-    } else {
-      const scheduleNext = () => {
-        const current = new Date();
-        let next = new Date(current);
-        const h = current.getHours();
-        if (h >= 6 && h <= 18) {
-          next.setHours(18, 1, 0, 0);
-          if (next <= current) next.setDate(next.getDate() + 1);
-        } else {
-          next.setHours(6, 0, 0, 0);
-          if (next <= current) next.setDate(next.getDate() + 1);
-        }
-        const ms = next.getTime() - current.getTime();
-        timeoutId = window.setTimeout(() => {
-          if (localStorage.getItem("theme")) return;
-          setTheme((prev) => {
-            const nxt = prev === "light" ? "dark" : "light";
-            applyTheme(nxt);
-            return nxt;
-          });
-        }, ms);
-      };
-      scheduleNext();
-    }
-
-    return () => {
-      if (mql) {
-        // @ts-ignore Safari
-        mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
-      }
-      if (timeoutId) window.clearTimeout(timeoutId);
-    };
+    setIsDay(hour >= 6 && hour < 18);
   }, []);
 
-  const toggleTheme = useMemo(
-    () => () => {
-      setTheme((prev) => {
-        const next = prev === "light" ? "dark" : "light";
-        applyTheme(next);
-        localStorage.setItem("theme", next); // manual preference
-        return next;
-      });
-    },
-    [],
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("theme-transition");
+    setTimeout(() => root.classList.remove("theme-transition"), 600);
+    if (isDay) root.classList.remove("dark");
+    else root.classList.add("dark");
+  }, [isDay]);
+
+  return isDay;
+}
+
+// ---------- Datos de tienda ----------
+export type Product = { id: number; name: string; price: number };
+const products: Product[] = [
+  { id: 1, name: "iPhone 15 Pro", price: 6_000_000 },
+  { id: 2, name: "Samsung Galaxy S24", price: 4_500_000 },
+  { id: 3, name: "Xiaomi Redmi Note 13", price: 1_200_000 },
+];
+
+// ---------- Componentes de Tienda ----------
+function Tienda({ addToCart }: { addToCart: (p: Product) => void }) {
+  return (
+    <div className="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3">
+      {products.map((p) => (
+        <div key={p.id} className="rounded-2xl bg-white p-4 shadow-lg dark:bg-gray-800">
+          <h3 className="text-lg font-bold">{p.name}</h3>
+          <p className="text-gray-500">${p.price.toLocaleString()}</p>
+          <button
+            onClick={() => addToCart(p)}
+            className="mt-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+          >
+            Agregar al carrito
+          </button>
+        </div>
+      ))}
+    </div>
   );
+}
+
+// ---------- Carrito ----------
+function Carrito({
+  cart,
+  removeFromCart,
+  clearCart,
+}: {
+  cart: Product[];
+  removeFromCart: (i: number) => void;
+  clearCart: () => void;
+}) {
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
+  return (
+    <div className="p-6">
+      <h2 className="mb-4 text-2xl font-bold">Carrito de Compras</h2>
+      {cart.length === 0 ? (
+        <p>Tu carrito está vacío</p>
+      ) : (
+        <>
+          <ul>
+            {cart.map((item, i) => (
+              <li key={`${item.id}-${i}`} className="mb-2 flex items-center justify-between">
+                {item.name} - ${item.price.toLocaleString()}
+                <button onClick={() => removeFromCart(i)} className="ml-2 text-red-500">
+                  X
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 font-bold">Total: ${total.toLocaleString()}</p>
+          <button onClick={clearCart} className="mt-2 rounded-xl bg-gray-600 px-4 py-2 text-white hover:bg-gray-700">
+            Vaciar carrito
+          </button>
+          <Link to="/checkout">
+            <button className="mt-2 ml-2 rounded-xl bg-green-600 px-4 py-2 text-white hover:bg-green-700">Ir a pagar</button>
+          </Link>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ---------- Checkout con Wompi (via backend seguro) ----------
+function Checkout({ cart }: { cart: Product[] }) {
+  const total = cart.reduce((acc, item) => acc + item.price, 0);
+
+  const pagar = async () => {
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cart: cart.map((c) => ({ id: String(c.id), name: c.name, price: c.price, qty: 1 })) }),
+    });
+    const data = await res.json();
+    if (data?.checkoutUrl) window.location.href = data.checkoutUrl as string;
+  };
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <CartProvider>
-            <div className="min-h-screen bg-background text-foreground">
-              <Header theme={theme} onToggleTheme={toggleTheme} />
-              <div className="fixed right-24 top-3 z-50 hidden md:block"><CartPanel /></div>
-              <main>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/thanks" element={<Thanks />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-              <WhatsappFab />
-            </div>
-          </CartProvider>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <div className="p-6">
+      <h2 className="mb-4 text-2xl font-bold">Finalizar Compra</h2>
+      <p>Total a pagar: ${total.toLocaleString()}</p>
+      <button onClick={pagar} className="mt-4 rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+        Pagar con Wompi
+      </button>
+    </div>
   );
-};
+}
+
+// ---------- Confirmación ----------
+function Confirmacion() {
+  return (
+    <div className="p-6 text-center">
+      <h2 className="mb-4 text-2xl font-bold">✅ Pago Exitoso</h2>
+      <p>Gracias por tu compra en M’E Store.</p>
+      <Link to="/tienda">
+        <button className="mt-4 rounded-xl bg-blue-600 px-4 py-2 text-white">Volver a la tienda</button>
+      </Link>
+    </div>
+  );
+}
+
+// ---------- Contacto con Google Maps ----------
+function Contacto() {
+  return (
+    <div className="p-6 text-center">
+      <h2 className="mb-4 text-2xl font-bold">📍 Nuestra Ubicación</h2>
+      <p>Cra. 81 #43-72, Local 1158 Laureles - Estadio, Medellín, Laureles, Medellín, Antioquia</p>
+      <iframe
+        src="https://www.google.com/maps?q=Cra.+81+%2343-72,+Local+1158+Laureles+-+Estadio,+Medell%C3%ADn,+Laureles,+Medell%C3%ADn,+Antioquia&output=embed"
+        width="100%"
+        height={400}
+        style={{ border: 0 }}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+        allowFullScreen
+        title="Ubicación M’E Store"
+      />
+    </div>
+  );
+}
+
+// ---------- App Principal ----------
+function App() {
+  const isDay = useDayNightMode();
+  const [cart, setCart] = useState<Product[]>([]);
+
+  const addToCart = (product: Product) => setCart((c) => [...c, product]);
+  const removeFromCart = (i: number) => setCart((c) => c.filter((_, idx) => idx !== i));
+  const clearCart = () => setCart([]);
+
+  return (
+    <Router>
+      <div className={isDay ? "bg-white text-black" : "bg-black text-white"}>
+        <header className="flex justify-between p-4 shadow-md">
+          <Link to="/tienda" className="text-xl font-bold">
+            M’E Store – Tienda
+          </Link>
+          <nav className="space-x-4">
+            <Link to="/carrito">🛒 ({cart.length})</Link>
+            <Link to="/contacto">📍 Contacto</Link>
+          </nav>
+        </header>
+
+        <Routes>
+          <Route path="/" element={<Navigate to="/tienda" replace />} />
+          <Route path="/tienda" element={<Tienda addToCart={addToCart} />} />
+          <Route path="/carrito" element={<Carrito cart={cart} removeFromCart={removeFromCart} clearCart={clearCart} />} />
+          <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route path="/confirmacion" element={<Confirmacion />} />
+          <Route path="/contacto" element={<Contacto />} />
+          <Route path="*" element={<Navigate to="/tienda" replace />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
 
 createRoot(document.getElementById("root")!).render(<App />);
