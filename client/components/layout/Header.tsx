@@ -86,7 +86,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
             </div>
             <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
             <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
-            <a onClick={() => setOpen(false)} href="#tienda" className="block text-sm">Tienda</a>
+            <a onClick={() => setOpen(false)} href="/tienda" className="block text-sm">Tienda</a>
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
             <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
