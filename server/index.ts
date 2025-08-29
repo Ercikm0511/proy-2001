@@ -19,6 +19,11 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Auth
+  app.post("/api/login", (await import("./routes/auth")).login);
+  app.get("/api/me", (await import("./routes/auth")).me);
+  app.post("/api/logout", (await import("./routes/auth")).logout);
+
   // Payments
   app.post("/api/checkout", (await import("./routes/checkout")).handleCheckout);
   app.post("/api/webhook", (req, res) => {
