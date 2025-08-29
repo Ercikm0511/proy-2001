@@ -18,18 +18,6 @@ export default function CartPanel() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="relative hidden md:inline-flex items-center gap-2 rounded-full border bg-background/60 px-3 py-2 text-sm"
-      >
-        <ShoppingCart className="h-4 w-4" />
-        <span>Carrito</span>
-        {items.length > 0 && (
-          <span className="ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">
-            {items.length}
-          </span>
-        )}
-      </button>
       {open && (
         <div className="fixed inset-0 z-[60] bg-black/30" onClick={() => setOpen(false)} />
       )}
