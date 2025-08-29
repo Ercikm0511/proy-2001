@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
+import { useCart } from "@/state/cart";
 
 type Product = {
   id: string;
@@ -32,6 +33,8 @@ export default function Inventory() {
       return matchesCat && matchesQuery;
     });
   }, [query, cat]);
+
+  const { add } = useCart();
 
   return (
     <section id="inventario" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
@@ -86,7 +89,9 @@ export default function Inventory() {
                 <span className="text-sm text-muted-foreground">${p.price.toLocaleString()}</span>
               </div>
               <div className="mt-3 flex gap-2">
-                <Button size="sm" className="shine-on-hover">Consultar</Button>
+                <Button size="sm" className="shine-on-hover" onClick={() => add({ id: p.id, name: p.name, price: p.price, image: p.image })}>
+                  Agregar al carrito
+                </Button>
                 <Button size="sm" variant="outline">Detalles</Button>
               </div>
             </div>

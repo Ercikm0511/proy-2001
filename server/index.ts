@@ -19,5 +19,13 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Payments
+  app.post("/api/checkout", (await import("./routes/checkout")).handleCheckout);
+  app.post("/api/webhook", (req, res) => {
+    // For production, verify signature header per Wompi docs
+    console.log("Wompi webhook:", req.body);
+    res.sendStatus(200);
+  });
+
   return app;
 }
