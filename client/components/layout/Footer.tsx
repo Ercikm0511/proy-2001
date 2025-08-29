@@ -30,8 +30,8 @@ export default function Footer() {
           <h4 className="text-sm font-semibold">Servicios</h4>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
             <li><a href="#servicios" className="hover:text-foreground">Reparaciones</a></li>
-            <li><a href="#inventario" className="hover:text-foreground">Móviles</a></li>
-            <li><a href="#inventario" className="hover:text-foreground">Accesorios</a></li>
+            <li><a href="#tienda" className="hover:text-foreground">Móviles</a></li>
+            <li><a href="#tienda" className="hover:text-foreground">Accesorios</a></li>
           </ul>
         </div>
         <div>
