@@ -15,6 +15,10 @@ import WhatsappFab from "@/components/sections/WhatsappFab";
 import { useEffect, useMemo, useState } from "react";
 import { CartProvider } from "@/state/cart";
 import CartPanel from "@/components/cart/CartPanel";
+import { AuthProvider } from "@/state/auth";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
