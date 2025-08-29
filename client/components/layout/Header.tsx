@@ -47,6 +47,18 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
           </button>
+          <button
+            onClick={() => setCartOpen(true)}
+            aria-label="Abrir carrito"
+            className="relative rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground"
+          >
+            <ShoppingCart className="h-4 w-4" />
+            {items.length > 0 && (
+              <span className="absolute -right-1 -top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] text-primary-foreground">
+                {items.length}
+              </span>
+            )}
+          </button>
           <Button className="shine-on-hover btn-glow" asChild>
             <a href="#contacto">Agenda tu reparación</a>
           </Button>
