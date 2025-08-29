@@ -9,6 +9,8 @@ export default function Contact() {
   const waMessage = encodeURIComponent(
     `Hola M’E Store, soy ${name || "cliente"}. Tel: ${phone || ""}. ${message || "Quiero más información."}`,
   );
+  const emailSubject = `Nuevo contacto M’E Store — ${name || "cliente"}`;
+  const emailBody = `Nombre: ${name || ""}\nTeléfono: ${phone || ""}\nMensaje: ${message || ""}`;
 
   return (
     <section id="contacto" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
@@ -66,7 +68,9 @@ export default function Contact() {
                 Enviar por WhatsApp
               </Button>
               <Button variant="outline" asChild>
-                <a href="mailto:contacto@me-store.com">Enviar por correo</a>
+                <a href={`mailto:mestore1204@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`}>
+                  Enviar por correo
+                </a>
               </Button>
             </div>
           </form>
