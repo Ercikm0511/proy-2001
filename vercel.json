@@ -6,9 +6,16 @@
   "functions": {
     "api/index.ts": {
       "maxDuration": 30
+    },
+    "api/hello.ts": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
+    {
+      "source": "/api/hello",
+      "destination": "/api/hello.ts"
+    },
     {
       "source": "/api/(.*)",
       "destination": "/api/index.ts"

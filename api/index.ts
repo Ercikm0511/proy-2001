@@ -67,4 +67,7 @@ app.get("*", (req, res) => {
   }
 });
 
-export default app; 
+// Export for Vercel serverless functions
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req, res);
+} 
