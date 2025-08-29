@@ -5,7 +5,15 @@ export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-32">
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white to-white dark:from-black dark:to-black" />
-      <div className="pointer-events-none absolute left-1/2 top-[-10%] -z-10 h-[50rem] w-[50rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+
+      <div>
+        <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+          <div className="relative w-1/2 max-md:w-full">
+            <div className="pointer-events-none absolute left-1/2 top-[-10%] -z-10 h-[50rem] w-[50rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+          </div>
+          <div className="w-1/2 max-md:w-full" />
+        </div>
+      </div>
 
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-10 px-4 md:flex-row md:gap-16 md:px-6">
         <div className="max-w-2xl text-center md:text-left">
