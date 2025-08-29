@@ -37,9 +37,9 @@ export default function Inventory() {
   const { add } = useCart();
 
   return (
-    <section id="inventario" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
+    <section id="tienda" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-        <h2 className="text-2xl font-semibold tracking-tight">Inventario</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">Tienda</h2>
         <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:flex-row">
           <input
             type="search"
