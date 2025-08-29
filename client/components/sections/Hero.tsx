@@ -43,7 +43,7 @@ export default function Hero() {
               <a href="#contacto">Agenda tu reparación</a>
             </Button>
             <Button size="lg" variant="outline" className="sm:ml-2" asChild>
-              <a href="#inventario">Explora nuestros productos</a>
+              <a href="#tienda">Explora nuestros productos</a>
             </Button>
           </motion.div>
         </div>
