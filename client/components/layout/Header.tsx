@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
-import { useAuth } from "@/state/auth";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
@@ -11,7 +10,6 @@ export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
-  const { user, logout } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -40,11 +38,6 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <a href="#tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
           <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
           <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
-          {user ? (
-            <a href="/admin" className="text-sm text-muted-foreground hover:text-foreground">Admin</a>
-          ) : (
-            <a href="/admin/login" className="text-sm text-muted-foreground hover:text-foreground">Acceso</a>
-          )}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <button
@@ -96,18 +89,10 @@ export default function Header({ theme, onToggleTheme }: Props) {
             <a onClick={() => setOpen(false)} href="#tienda" className="block text-sm">Tienda</a>
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
-            {user ? (
-              <a onClick={() => setOpen(false)} href="/admin" className="block text-sm">Admin</a>
-            ) : (
-              <a onClick={() => setOpen(false)} href="/admin/login" className="block text-sm">Acceso</a>
-            )}
             <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
             <Button className="w-full mt-2" asChild>
-              <a href="#contacto">Agenda tu reparación</a>
+              <a href="#contacto">Agenda tu reparaci��n</a>
             </Button>
-            {user && (
-              <Button onClick={() => { logout(); setOpen(false); }} className="w-full mt-2" variant="outline">Cerrar sesión</Button>
-            )}
           </div>
         </div>
       )}
