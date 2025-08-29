@@ -35,7 +35,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
         <nav className="hidden items-center gap-6 md:flex">
           <a href="#servicios" className="text-sm text-muted-foreground hover:text-foreground">Servicios</a>
           <a href="#galeria" className="text-sm text-muted-foreground hover:text-foreground">Galería</a>
-          <a href="#inventario" className="text-sm text-muted-foreground hover:text-foreground">Inventario</a>
+          <a href="#tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
           <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
           <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
         </nav>
@@ -86,7 +86,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
             </div>
             <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
             <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
-            <a onClick={() => setOpen(false)} href="#inventario" className="block text-sm">Inventario</a>
+            <a onClick={() => setOpen(false)} href="#tienda" className="block text-sm">Tienda</a>
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
             <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
