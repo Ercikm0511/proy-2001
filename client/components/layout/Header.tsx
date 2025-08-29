@@ -35,7 +35,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
         <nav className="hidden items-center gap-6 md:flex">
           <a href="#servicios" className="text-sm text-muted-foreground hover:text-foreground">Servicios</a>
           <a href="#galeria" className="text-sm text-muted-foreground hover:text-foreground">Galería</a>
-          <a href="#tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
+          <a href="/tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
           <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
           <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
         </nav>
@@ -91,7 +91,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
             <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
             <Button className="w-full mt-2" asChild>
-              <a href="#contacto">Agenda tu reparaci��n</a>
+              <a href="#contacto">Agenda tu reparación</a>
             </Button>
           </div>
         </div>
