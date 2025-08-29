@@ -7,7 +7,7 @@ type Product = {
   id: string;
   name: string;
   price: number;
-  category: "móviles" | "accesorios" | "repuestos";
+  category: "móviles" | "accesorios";
   image: string;
 };
 
@@ -16,8 +16,6 @@ const PRODUCTS: Product[] = [
   { id: "p2", name: "Samsung Galaxy S23", price: 15999, category: "móviles", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1200&auto=format&fit=crop" },
   { id: "p3", name: "Cargador 20W USB‑C", price: 499, category: "accesorios", image: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?q=80&w=1200&auto=format&fit=crop" },
   { id: "p4", name: "Cable Lightning trenzado", price: 349, category: "accesorios", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p5", name: "Pantalla OLED iPhone 12", price: 2899, category: "repuestos", image: "https://images.unsplash.com/photo-1510936111840-65e151ad71bb?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p6", name: "Batería original Samsung", price: 1499, category: "repuestos", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop" },
   { id: "p7", name: "Case MagSafe", price: 699, category: "accesorios", image: "https://images.unsplash.com/photo-1601435119439-c1f5f950b35e?q=80&w=1200&auto=format&fit=crop" },
   { id: "p8", name: "Pixel 8 Pro", price: 17499, category: "móviles", image: "https://images.unsplash.com/photo-1603808033070-24bb34d4a703?q=80&w=1200&auto=format&fit=crop" },
 ];
