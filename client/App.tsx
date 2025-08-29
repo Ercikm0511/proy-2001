@@ -21,7 +21,6 @@ function applyTheme(mode: "light" | "dark") {
   window.setTimeout(() => root.classList.remove("theme-transition"), 600);
   if (mode === "dark") root.classList.add("dark");
   else root.classList.remove("dark");
-  localStorage.setItem("theme", mode);
 }
 
 const App = () => {
@@ -29,39 +28,64 @@ const App = () => {
 
   useEffect(() => {
     const saved = (localStorage.getItem("theme") as "light" | "dark" | null);
-    let initial: "light" | "dark";
-    const now = new Date();
-    const h = now.getHours();
-    if (saved) initial = saved;
-    else initial = h >= 6 && h <= 18 ? "light" : "dark";
+    if (saved) {
+      setTheme(saved);
+      applyTheme(saved);
+      return;
+    }
+
+    const hour = new Date().getHours();
+    const mql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+    const initial: "light" | "dark" = mql && typeof mql.matches === "boolean"
+      ? (mql.matches ? "dark" : (hour >= 6 && hour <= 18 ? "light" : "dark"))
+      : (hour >= 6 && hour <= 18 ? "light" : "dark");
 
     setTheme(initial);
     applyTheme(initial);
 
-    const scheduleNext = () => {
-      const current = new Date();
-      let next = new Date(current);
-      if (h >= 6 && h <= 18) {
-        // next boundary: 18:01 today
-        next.setHours(18, 1, 0, 0);
-        if (next <= current) next.setDate(next.getDate() + 1);
-      } else {
-        // next boundary: 06:00 next day
-        next.setHours(6, 0, 0, 0);
-        if (next <= current) next.setDate(next.getDate() + 1);
-      }
-      const ms = next.getTime() - current.getTime();
-      return window.setTimeout(() => {
-        setTheme((prev) => {
-          const nextMode = prev === "light" ? "dark" : "light";
-          applyTheme(nextMode);
-          return nextMode;
-        });
-      }, ms);
+    let timeoutId: number | null = null;
+    const onChange = (e: MediaQueryListEvent) => {
+      if (localStorage.getItem("theme")) return; // manual override exists
+      const next = e.matches ? "dark" : "light";
+      setTheme(next);
+      applyTheme(next);
     };
 
-    const timeout = scheduleNext();
-    return () => window.clearTimeout(timeout);
+    if (mql) {
+      // @ts-ignore Safari
+      mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
+    } else {
+      const scheduleNext = () => {
+        const current = new Date();
+        let next = new Date(current);
+        const h = current.getHours();
+        if (h >= 6 && h <= 18) {
+          next.setHours(18, 1, 0, 0);
+          if (next <= current) next.setDate(next.getDate() + 1);
+        } else {
+          next.setHours(6, 0, 0, 0);
+          if (next <= current) next.setDate(next.getDate() + 1);
+        }
+        const ms = next.getTime() - current.getTime();
+        timeoutId = window.setTimeout(() => {
+          if (localStorage.getItem("theme")) return;
+          setTheme((prev) => {
+            const nxt = prev === "light" ? "dark" : "light";
+            applyTheme(nxt);
+            return nxt;
+          });
+        }, ms);
+      };
+      scheduleNext();
+    }
+
+    return () => {
+      if (mql) {
+        // @ts-ignore Safari
+        mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
+      }
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
   }, []);
 
   const toggleTheme = useMemo(
@@ -69,6 +93,7 @@ const App = () => {
       setTheme((prev) => {
         const next = prev === "light" ? "dark" : "light";
         applyTheme(next);
+        localStorage.setItem("theme", next); // manual preference
         return next;
       });
     },
