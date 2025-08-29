@@ -31,7 +31,7 @@ const App = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
-    const saved = (localStorage.getItem("theme") as "light" | "dark" | null);
+    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
     if (saved) {
       setTheme(saved);
       applyTheme(saved);
@@ -39,10 +39,19 @@ const App = () => {
     }
 
     const hour = new Date().getHours();
-    const mql = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
-    const initial: "light" | "dark" = mql && typeof mql.matches === "boolean"
-      ? (mql.matches ? "dark" : (hour >= 6 && hour <= 18 ? "light" : "dark"))
-      : (hour >= 6 && hour <= 18 ? "light" : "dark");
+    const mql = window.matchMedia
+      ? window.matchMedia("(prefers-color-scheme: dark)")
+      : null;
+    const initial: "light" | "dark" =
+      mql && typeof mql.matches === "boolean"
+        ? mql.matches
+          ? "dark"
+          : hour >= 6 && hour <= 18
+            ? "light"
+            : "dark"
+        : hour >= 6 && hour <= 18
+          ? "light"
+          : "dark";
 
     setTheme(initial);
     applyTheme(initial);
@@ -57,7 +66,9 @@ const App = () => {
 
     if (mql) {
       // @ts-ignore Safari
-      mql.addEventListener ? mql.addEventListener("change", onChange) : mql.addListener(onChange);
+      mql.addEventListener
+        ? mql.addEventListener("change", onChange)
+        : mql.addListener(onChange);
     } else {
       const scheduleNext = () => {
         const current = new Date();
@@ -86,7 +97,9 @@ const App = () => {
     return () => {
       if (mql) {
         // @ts-ignore Safari
-        mql.removeEventListener ? mql.removeEventListener("change", onChange) : mql.removeListener(onChange);
+        mql.removeEventListener
+          ? mql.removeEventListener("change", onChange)
+          : mql.removeListener(onChange);
       }
       if (timeoutId) window.clearTimeout(timeoutId);
     };
@@ -113,7 +126,9 @@ const App = () => {
           <CartProvider>
             <div className="min-h-screen bg-background text-foreground">
               <Header theme={theme} onToggleTheme={toggleTheme} />
-              <div className="fixed right-24 top-3 z-50 hidden md:block"><CartPanel /></div>
+              <div className="fixed right-24 top-3 z-50 hidden md:block">
+                <CartPanel />
+              </div>
               <main>
                 <Routes>
                   <Route path="/" element={<Index />} />

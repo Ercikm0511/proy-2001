@@ -31,7 +31,8 @@ function computeEnd(startIso: string) {
 app.get("/api/appointments/occupied", async (req, res) => {
   try {
     const date = req.query.date as string;
-    if (!date) return res.status(400).json({ error: "date required (YYYY-MM-DD)" });
+    if (!date)
+      return res.status(400).json({ error: "date required (YYYY-MM-DD)" });
     const startDay = new Date(`${date}T00:00:00.000Z`);
     const endDay = new Date(`${date}T23:59:59.999Z`);
     const appointments = await prisma.appointment.findMany({
@@ -70,7 +71,16 @@ app.post("/api/appointments", async (req, res) => {
     sendEmail?: boolean;
   };
 
-  if (!name || !documentNumber || !phone || !email || !phoneBrand || !phoneModel || !message || !startAt) {
+  if (
+    !name ||
+    !documentNumber ||
+    !phone ||
+    !email ||
+    !phoneBrand ||
+    !phoneModel ||
+    !message ||
+    !startAt
+  ) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -92,9 +102,14 @@ app.post("/api/appointments", async (req, res) => {
 
   let client = await prisma.client.findUnique({ where: { documentNumber } });
   if (!client) {
-    client = await prisma.client.create({ data: { name, documentNumber, phone, email } });
+    client = await prisma.client.create({
+      data: { name, documentNumber, phone, email },
+    });
   } else {
-    client = await prisma.client.update({ where: { id: client.id }, data: { phone, email, name } });
+    client = await prisma.client.update({
+      where: { id: client.id },
+      data: { phone, email, name },
+    });
   }
 
   const appointment = await prisma.appointment.create({
@@ -140,7 +155,11 @@ app.get("/api/appointments", async (req, res) => {
       const endDay = new Date(`${date}T23:59:59.999Z`);
       where.startAt = { gte: startDay, lte: endDay };
     }
-    const appts = await prisma.appointment.findMany({ where, orderBy: { startAt: "asc" }, include: { client: true } });
+    const appts = await prisma.appointment.findMany({
+      where,
+      orderBy: { startAt: "asc" },
+      include: { client: true },
+    });
     return res.json({ appointments: appts });
   } catch (err) {
     console.error(err);

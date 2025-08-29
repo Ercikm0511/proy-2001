@@ -12,12 +12,54 @@ type Product = {
 };
 
 const PRODUCTS: Product[] = [
-  { id: "p1", name: "iPhone 13 Pro", price: 16999, category: "móviles", image: "https://images.unsplash.com/photo-1631380739856-c5b32b67fb7f?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p2", name: "Samsung Galaxy S23", price: 15999, category: "móviles", image: "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p3", name: "Cargador 20W USB‑C", price: 499, category: "accesorios", image: "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p4", name: "Cable Lightning trenzado", price: 349, category: "accesorios", image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p7", name: "Case MagSafe", price: 699, category: "accesorios", image: "https://images.unsplash.com/photo-1601435119439-c1f5f950b35e?q=80&w=1200&auto=format&fit=crop" },
-  { id: "p8", name: "Pixel 8 Pro", price: 17499, category: "móviles", image: "https://images.unsplash.com/photo-1603808033070-24bb34d4a703?q=80&w=1200&auto=format&fit=crop" },
+  {
+    id: "p1",
+    name: "iPhone 13 Pro",
+    price: 16999,
+    category: "móviles",
+    image:
+      "https://images.unsplash.com/photo-1631380739856-c5b32b67fb7f?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "p2",
+    name: "Samsung Galaxy S23",
+    price: 15999,
+    category: "móviles",
+    image:
+      "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "p3",
+    name: "Cargador 20W USB‑C",
+    price: 499,
+    category: "accesorios",
+    image:
+      "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "p4",
+    name: "Cable Lightning trenzado",
+    price: 349,
+    category: "accesorios",
+    image:
+      "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "p7",
+    name: "Case MagSafe",
+    price: 699,
+    category: "accesorios",
+    image:
+      "https://images.unsplash.com/photo-1601435119439-c1f5f950b35e?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "p8",
+    name: "Pixel 8 Pro",
+    price: 17499,
+    category: "móviles",
+    image:
+      "https://images.unsplash.com/photo-1603808033070-24bb34d4a703?q=80&w=1200&auto=format&fit=crop",
+  },
 ];
 
 export default function Inventory() {
@@ -76,7 +118,12 @@ export default function Inventory() {
             className="group overflow-hidden rounded-2xl border bg-card shadow-sm"
           >
             <div className="relative">
-              <img src={p.image} alt={p.name} className="h-56 w-full object-cover transition duration-300 group-hover:scale-105" loading="lazy" />
+              <img
+                src={p.image}
+                alt={p.name}
+                className="h-56 w-full object-cover transition duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
               <span className="absolute left-3 top-3 rounded-full bg-background/80 px-3 py-1 text-xs capitalize backdrop-blur">
                 {p.category}
               </span>
@@ -84,13 +131,28 @@ export default function Inventory() {
             <div className="p-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-medium">{p.name}</h3>
-                <span className="text-sm text-muted-foreground">${p.price.toLocaleString()}</span>
+                <span className="text-sm text-muted-foreground">
+                  ${p.price.toLocaleString()}
+                </span>
               </div>
               <div className="mt-3 flex gap-2">
-                <Button size="sm" className="shine-on-hover" onClick={() => add({ id: p.id, name: p.name, price: p.price, image: p.image })}>
+                <Button
+                  size="sm"
+                  className="shine-on-hover"
+                  onClick={() =>
+                    add({
+                      id: p.id,
+                      name: p.name,
+                      price: p.price,
+                      image: p.image,
+                    })
+                  }
+                >
                   Agregar al carrito
                 </Button>
-                <Button size="sm" variant="outline">Detalles</Button>
+                <Button size="sm" variant="outline">
+                  Detalles
+                </Button>
               </div>
             </div>
           </motion.div>

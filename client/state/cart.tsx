@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 export type CartItem = {
   id: string;
@@ -28,15 +34,25 @@ export function CartProvider({ children }: PropsWithChildren) {
   const add: CartContextType["add"] = (item, qty = 1) => {
     setItems((prev) => {
       const found = prev.find((p) => p.id === item.id);
-      if (found) return prev.map((p) => (p.id === item.id ? { ...p, qty: p.qty + qty } : p));
+      if (found)
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, qty: p.qty + qty } : p,
+        );
       return [...prev, { ...item, qty }];
     });
   };
 
-  const remove = (id: string) => setItems((prev) => prev.filter((p) => p.id !== id));
+  const remove = (id: string) =>
+    setItems((prev) => prev.filter((p) => p.id !== id));
   const clear = () => setItems([]);
-  const setQty = (id: string, qty: number) => setItems((prev) => prev.map((p) => (p.id === id ? { ...p, qty: Math.max(1, qty) } : p)));
-  const total = useMemo(() => items.reduce((acc, i) => acc + i.price * i.qty, 0), [items]);
+  const setQty = (id: string, qty: number) =>
+    setItems((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, qty: Math.max(1, qty) } : p)),
+    );
+  const total = useMemo(
+    () => items.reduce((acc, i) => acc + i.price * i.qty, 0),
+    [items],
+  );
 
   const value = useMemo(
     () => ({ items, add, remove, clear, setQty, total, open, setOpen }),

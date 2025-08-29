@@ -10,7 +10,15 @@ export default function CartPanel() {
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart: items.map(({ id, name, price, qty, image }) => ({ id, name, price, qty, image })) }),
+      body: JSON.stringify({
+        cart: items.map(({ id, name, price, qty, image }) => ({
+          id,
+          name,
+          price,
+          qty,
+          image,
+        })),
+      }),
     });
     const data = await res.json();
     if (data?.checkoutUrl) window.location.href = data.checkoutUrl as string;
@@ -19,7 +27,10 @@ export default function CartPanel() {
   return (
     <>
       {open && (
-        <div className="fixed inset-0 z-[60] bg-black/30" onClick={() => setOpen(false)} />
+        <div
+          className="fixed inset-0 z-[60] bg-black/30"
+          onClick={() => setOpen(false)}
+        />
       )}
       <aside
         className={`fixed right-0 top-0 z-[61] h-full w-full max-w-md transform bg-background shadow-2xl transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
@@ -35,20 +46,48 @@ export default function CartPanel() {
         </div>
         <div className="max-h-[65vh] overflow-y-auto p-4">
           {items.length === 0 && (
-            <p className="text-sm text-muted-foreground">Tu carrito está vacío.</p>
+            <p className="text-sm text-muted-foreground">
+              Tu carrito está vacío.
+            </p>
           )}
           <ul className="space-y-3">
             {items.map((it) => (
-              <li key={it.id} className="flex items-center gap-3 rounded-xl border p-3">
-                {it.image && <img src={it.image} alt={it.name} className="h-14 w-14 rounded-lg object-cover" />}
+              <li
+                key={it.id}
+                className="flex items-center gap-3 rounded-xl border p-3"
+              >
+                {it.image && (
+                  <img
+                    src={it.image}
+                    alt={it.name}
+                    className="h-14 w-14 rounded-lg object-cover"
+                  />
+                )}
                 <div className="flex-1">
                   <p className="text-sm font-medium">{it.name}</p>
-                  <p className="text-xs text-muted-foreground">${it.price.toLocaleString()}</p>
+                  <p className="text-xs text-muted-foreground">
+                    ${it.price.toLocaleString()}
+                  </p>
                   <div className="mt-2 flex items-center gap-2 text-sm">
-                    <button className="h-6 w-6 rounded border" onClick={() => setQty(it.id, it.qty - 1)}>-</button>
+                    <button
+                      className="h-6 w-6 rounded border"
+                      onClick={() => setQty(it.id, it.qty - 1)}
+                    >
+                      -
+                    </button>
                     <span>{it.qty}</span>
-                    <button className="h-6 w-6 rounded border" onClick={() => setQty(it.id, it.qty + 1)}>+</button>
-                    <button className="ml-auto text-xs text-red-500" onClick={() => remove(it.id)}>Quitar</button>
+                    <button
+                      className="h-6 w-6 rounded border"
+                      onClick={() => setQty(it.id, it.qty + 1)}
+                    >
+                      +
+                    </button>
+                    <button
+                      className="ml-auto text-xs text-red-500"
+                      onClick={() => remove(it.id)}
+                    >
+                      Quitar
+                    </button>
                   </div>
                 </div>
               </li>
@@ -61,10 +100,20 @@ export default function CartPanel() {
             <span className="font-semibold">${total.toLocaleString()}</span>
           </div>
           <div className="mt-3 flex gap-2">
-            <Button className="flex-1" onClick={checkout} disabled={!items.length}>Finalizar compra</Button>
-            <Button variant="outline" onClick={clear}>Vaciar</Button>
+            <Button
+              className="flex-1"
+              onClick={checkout}
+              disabled={!items.length}
+            >
+              Finalizar compra
+            </Button>
+            <Button variant="outline" onClick={clear}>
+              Vaciar
+            </Button>
           </div>
-          <p className="mt-2 text-xs text-muted-foreground">Pago seguro con Wompi (tarjeta, PSE, Nequi, Bancolombia).</p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Pago seguro con Wompi (tarjeta, PSE, Nequi, Bancolombia).
+          </p>
         </div>
       </aside>
     </>

@@ -68,7 +68,9 @@ export default function Contact() {
                 Enviar por WhatsApp
               </Button>
               <Button variant="outline" asChild>
-                <a href={`mailto:mestore1204@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`}>
+                <a
+                  href={`mailto:mestore1204@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`}
+                >
                   Enviar por correo
                 </a>
               </Button>

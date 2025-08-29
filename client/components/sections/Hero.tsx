@@ -31,7 +31,8 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="mt-4 text-lg text-muted-foreground md:text-xl"
           >
-            Servicio técnico premium, dispositivos certificados y accesorios que elevan tu experiencia.
+            Servicio técnico premium, dispositivos certificados y accesorios que
+            elevan tu experiencia.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

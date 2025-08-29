@@ -26,10 +26,17 @@ export default function Testimonials() {
       <div className="mt-6">
         <EmblaCarousel>
           {items.map((t) => (
-            <div key={t.name} className="min-w-full px-1 sm:min-w-[50%] lg:min-w-[33.333%]">
+            <div
+              key={t.name}
+              className="min-w-full px-1 sm:min-w-[50%] lg:min-w-[33.333%]"
+            >
               <div className="mr-4 rounded-2xl border bg-card p-6 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <img src={t.img} alt={t.name} className="h-12 w-12 rounded-full object-cover" />
+                  <img
+                    src={t.img}
+                    alt={t.name}
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
                   <div>
                     <p className="text-sm font-medium">{t.name}</p>
                     <div className="flex text-primary">

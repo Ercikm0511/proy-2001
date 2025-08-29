@@ -5,7 +5,10 @@ export type EmblaProps = PropsWithChildren<{
   autoplayMs?: number;
 }>;
 
-export default function EmblaCarousel({ children, autoplayMs = 4500 }: EmblaProps) {
+export default function EmblaCarousel({
+  children,
+  autoplayMs = 4500,
+}: EmblaProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
 
   const start = useCallback(() => {
@@ -29,10 +32,13 @@ export default function EmblaCarousel({ children, autoplayMs = 4500 }: EmblaProp
   }, [emblaApi, start, stop]);
 
   return (
-    <div ref={emblaRef} onMouseEnter={stop} onMouseLeave={start} className="overflow-hidden">
-      <div className="flex">
-        {children}
-      </div>
+    <div
+      ref={emblaRef}
+      onMouseEnter={stop}
+      onMouseLeave={start}
+      className="overflow-hidden"
+    >
+      <div className="flex">{children}</div>
     </div>
   );
 }

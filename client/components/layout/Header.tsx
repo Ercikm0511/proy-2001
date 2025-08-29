@@ -30,14 +30,41 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
             <Smartphone className="h-5 w-5" />
           </div>
-          <span className="text-lg font-semibold tracking-tight">M’E Store</span>
+          <span className="text-lg font-semibold tracking-tight">
+            M’E Store
+          </span>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
-          <a href="#servicios" className="text-sm text-muted-foreground hover:text-foreground">Servicios</a>
-          <a href="#galeria" className="text-sm text-muted-foreground hover:text-foreground">Galería</a>
-          <a href="/tienda" className="text-sm text-muted-foreground hover:text-foreground">Tienda</a>
-          <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
-          <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
+          <a
+            href="#servicios"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            Servicios
+          </a>
+          <a
+            href="#galeria"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            Galería
+          </a>
+          <a
+            href="/tienda"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            Tienda
+          </a>
+          <a
+            href="#testimonios"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            Testimonios
+          </a>
+          <a
+            href="#contacto"
+            className="text-sm text-muted-foreground hover:text-foreground"
+          >
+            Contacto
+          </a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <button
@@ -45,7 +72,11 @@ export default function Header({ theme, onToggleTheme }: Props) {
             aria-label="Cambiar tema"
             className="rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground"
           >
-            {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+            {theme === "dark" ? (
+              <Moon className="h-4 w-4" />
+            ) : (
+              <Sun className="h-4 w-4" />
+            )}
           </button>
           <button
             onClick={() => setCartOpen(true)}
@@ -75,21 +106,68 @@ export default function Header({ theme, onToggleTheme }: Props) {
         <div className="md:hidden">
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm">Modo {theme === "dark" ? "Noche" : "Día"}</span>
+              <span className="text-sm">
+                Modo {theme === "dark" ? "Noche" : "Día"}
+              </span>
               <button
-                onClick={() => { onToggleTheme(); setOpen(false); }}
+                onClick={() => {
+                  onToggleTheme();
+                  setOpen(false);
+                }}
                 aria-label="Cambiar tema"
                 className="rounded-full border bg-background/60 p-2 text-muted-foreground"
               >
-                {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                {theme === "dark" ? (
+                  <Moon className="h-4 w-4" />
+                ) : (
+                  <Sun className="h-4 w-4" />
+                )}
               </button>
             </div>
-            <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
-            <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
-            <a onClick={() => setOpen(false)} href="/tienda" className="block text-sm">Tienda</a>
-            <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
-            <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
-            <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
+            <a
+              onClick={() => setOpen(false)}
+              href="#servicios"
+              className="block text-sm"
+            >
+              Servicios
+            </a>
+            <a
+              onClick={() => setOpen(false)}
+              href="#galeria"
+              className="block text-sm"
+            >
+              Galería
+            </a>
+            <a
+              onClick={() => setOpen(false)}
+              href="/tienda"
+              className="block text-sm"
+            >
+              Tienda
+            </a>
+            <a
+              onClick={() => setOpen(false)}
+              href="#testimonios"
+              className="block text-sm"
+            >
+              Testimonios
+            </a>
+            <a
+              onClick={() => setOpen(false)}
+              href="#contacto"
+              className="block text-sm"
+            >
+              Contacto
+            </a>
+            <button
+              onClick={() => {
+                setCartOpen(true);
+                setOpen(false);
+              }}
+              className="mt-2 w-full rounded-lg border p-2 text-sm"
+            >
+              Ver carrito
+            </button>
             <Button className="w-full mt-2" asChild>
               <a href="#contacto">Agenda tu reparación</a>
             </Button>
