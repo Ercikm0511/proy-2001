@@ -12,86 +12,87 @@
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Day mode (06:00–18:00) */
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 0 0% 20%; /* #333333 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 96%; /* #F5F5F5 */
+    --card-foreground: 0 0% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 20%;
 
-    /* Electric blue accent for CTAs and highlights */
-    --primary: 217.2 91.2% 59.8%;
+    /* Electric blue accent */
+    --primary: 211 100% 50%; /* #007BFF */
     --primary-foreground: 0 0% 100%;
 
-    /* Subtle neutral surfaces */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 210 20% 97%;
+    --muted: 0 0% 96%;
     --muted-foreground: 215 16% 46%;
 
-    --accent: 210 20% 96%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 20%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 217.2 91.2% 59.8%;
+    --ring: 211 100% 50%;
 
     --radius: 0.75rem;
 
     /* Sidebar tokens retained */
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 211 100% 50%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 211 100% 50%;
   }
 
   .dark {
-    /* Deep black with high contrast text and electric blue accents */
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
+    /* Night mode (18:01–05:59) */
+    --background: 0 0% 0%; /* #000000 */
+    --foreground: 0 0% 88%; /* #E0E0E0 */
 
-    --card: 0 0% 6%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 11%; /* #1C1C1C */
+    --card-foreground: 0 0% 88%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 11%;
+    --popover-foreground: 0 0% 88%;
 
-    --primary: 217.2 91.2% 59.8%;
+    --primary: 211 100% 50%; /* #007BFF */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 0% 88%;
 
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 70%;
 
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 11%;
+    --accent-foreground: 0 0% 88%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 211 100% 50%;
+
     --sidebar-background: 0 0% 0%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-foreground: 0 0% 88%;
+    --sidebar-primary: 211 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 0 0% 11%;
+    --sidebar-accent-foreground: 0 0% 88%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 211 100% 50%;
   }
 }
 
@@ -109,6 +110,12 @@
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI,
       Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
       "Segoe UI Emoji";
+  }
+
+  /* Smooth theme transition helper */
+  html.theme-transition, html.theme-transition * {
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease,
+      fill 0.5s ease, stroke 0.5s ease;
   }
 
   /* Subtle premium glow for buttons */

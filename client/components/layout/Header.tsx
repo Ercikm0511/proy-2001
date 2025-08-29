@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, Smartphone } from "lucide-react";
+import { Menu, Smartphone, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function Header() {
+type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
+
+export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -35,7 +37,14 @@ export default function Header() {
           <a href="#testimonios" className="text-sm text-muted-foreground hover:text-foreground">Testimonios</a>
           <a href="#contacto" className="text-sm text-muted-foreground hover:text-foreground">Contacto</a>
         </nav>
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-2 md:flex">
+          <button
+            onClick={onToggleTheme}
+            aria-label="Cambiar tema"
+            className="rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground"
+          >
+            {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </button>
           <Button className="shine-on-hover btn-glow" asChild>
             <a href="#contacto">Agenda tu reparación</a>
           </Button>
@@ -51,6 +60,16 @@ export default function Header() {
       {open && (
         <div className="md:hidden">
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-sm">Modo {theme === "dark" ? "Noche" : "Día"}</span>
+              <button
+                onClick={() => { onToggleTheme(); setOpen(false); }}
+                aria-label="Cambiar tema"
+                className="rounded-full border bg-background/60 p-2 text-muted-foreground"
+              >
+                {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+              </button>
+            </div>
             <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
             <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
             <a onClick={() => setOpen(false)} href="#inventario" className="block text-sm">Inventario</a>
