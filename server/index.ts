@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 
-export function createServer() {
+export async function createServer() {
   const app = express();
 
   // Middleware
@@ -20,7 +20,8 @@ export function createServer() {
   app.get("/api/demo", handleDemo);
 
   // Payments
-  app.post("/api/checkout", (await import("./routes/checkout")).handleCheckout);
+  const { handleCheckout } = await import("./routes/checkout");
+  app.post("/api/checkout", handleCheckout);
   app.post("/api/webhook", (req, res) => {
     // For production, verify signature header per Wompi docs
     console.log("Wompi webhook:", req.body);
