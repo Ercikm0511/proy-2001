@@ -49,7 +49,7 @@ export default function Inventory() {
             className="w-full rounded-xl border bg-background px-4 py-2 text-sm outline-none ring-primary/30 focus:ring-2 sm:w-72"
           />
           <div className="flex rounded-xl border p-1">
-            {(["todos", "móviles", "accesorios", "repuestos"] as const).map((c) => (
+            {(["todos", "móviles", "accesorios"] as const).map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
