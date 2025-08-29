@@ -30,13 +30,38 @@ const App = () => {
   useEffect(() => {
     const saved = (localStorage.getItem("theme") as "light" | "dark" | null);
     let initial: "light" | "dark";
+    const now = new Date();
+    const h = now.getHours();
     if (saved) initial = saved;
-    else {
-      const h = new Date().getHours();
-      initial = h >= 6 && h <= 18 ? "light" : "dark";
-    }
+    else initial = h >= 6 && h <= 18 ? "light" : "dark";
+
     setTheme(initial);
     applyTheme(initial);
+
+    const scheduleNext = () => {
+      const current = new Date();
+      let next = new Date(current);
+      if (h >= 6 && h <= 18) {
+        // next boundary: 18:01 today
+        next.setHours(18, 1, 0, 0);
+        if (next <= current) next.setDate(next.getDate() + 1);
+      } else {
+        // next boundary: 06:00 next day
+        next.setHours(6, 0, 0, 0);
+        if (next <= current) next.setDate(next.getDate() + 1);
+      }
+      const ms = next.getTime() - current.getTime();
+      return window.setTimeout(() => {
+        setTheme((prev) => {
+          const nextMode = prev === "light" ? "dark" : "light";
+          applyTheme(nextMode);
+          return nextMode;
+        });
+      }, ms);
+    };
+
+    const timeout = scheduleNext();
+    return () => window.clearTimeout(timeout);
   }, []);
 
   const toggleTheme = useMemo(
