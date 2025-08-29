@@ -96,10 +96,18 @@ export default function Header({ theme, onToggleTheme }: Props) {
             <a onClick={() => setOpen(false)} href="#tienda" className="block text-sm">Tienda</a>
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
+            {user ? (
+              <a onClick={() => setOpen(false)} href="/admin" className="block text-sm">Admin</a>
+            ) : (
+              <a onClick={() => setOpen(false)} href="/admin/login" className="block text-sm">Acceso</a>
+            )}
             <button onClick={() => { setCartOpen(true); setOpen(false); }} className="mt-2 w-full rounded-lg border p-2 text-sm">Ver carrito</button>
             <Button className="w-full mt-2" asChild>
               <a href="#contacto">Agenda tu reparación</a>
             </Button>
+            {user && (
+              <Button onClick={() => { logout(); setOpen(false); }} className="w-full mt-2" variant="outline">Cerrar sesión</Button>
+            )}
           </div>
         </div>
       )}
