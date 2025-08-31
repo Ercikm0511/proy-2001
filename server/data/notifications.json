@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "id": "1756621983100-k34vnp02zar",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "Hola quisiera saber el tiempo de reparacion de un dispositivo",
+    "createdAt": "2025-08-31T06:33:03.101Z",
+    "sent": false
+  },
+  {
+    "id": "1756622001518-a97af6pn3p",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "Quiero una cotización rápida",
+    "createdAt": "2025-08-31T06:33:21.518Z",
+    "sent": false
+  },
+  {
+    "id": "1756622018044-s3aimw99bi",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "Quiero hablar con un asesor humano",
+    "createdAt": "2025-08-31T06:33:38.044Z",
+    "sent": false
+  },
+  {
+    "id": "1756622067689-kduawh9by3h",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "Sabes el Tiempo de ruracion por un cambio de Display",
+    "createdAt": "2025-08-31T06:34:27.689Z",
+    "sent": false
+  },
+  {
+    "id": "1756622077547-yo35hov1pxq",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "¿Cuál es la dirección de la tienda?",
+    "createdAt": "2025-08-31T06:34:37.547Z",
+    "sent": false
+  },
+  {
+    "id": "1756622108758-1rh1nxawggk",
+    "sessionId": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "message": "¿Cuáles son sus horarios?",
+    "createdAt": "2025-08-31T06:35:08.758Z",
+    "sent": false
+  }
+]

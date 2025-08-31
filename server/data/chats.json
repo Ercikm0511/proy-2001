@@ -24,5 +24,79 @@
         "at": "2025-08-31T06:29:53.737Z"
       }
     ]
+  },
+  {
+    "id": "1756621951119-hebbmuqu31v",
+    "name": "Alberto  Palencia",
+    "email": "Erickm051199@gmail.com",
+    "createdAt": "2025-08-31T06:32:31.119Z",
+    "messages": [
+      {
+        "role": "bot",
+        "content": "👋 Hola, bienvenido a M’E Store. Soy tu asistente virtual, ¿en qué puedo ayudarte hoy?",
+        "at": "2025-08-31T06:32:31.119Z"
+      },
+      {
+        "role": "user",
+        "content": "Hola quisiera saber el tiempo de reparacion de un dispositivo",
+        "at": "2025-08-31T06:33:03.100Z"
+      },
+      {
+        "role": "bot",
+        "content": "Hola Alberto 👋, ¿en qué puedo ayudarte?\nOfrecemos: reparaciones profesionales, venta de accesorios y venta de celulares certificados.",
+        "at": "2025-08-31T06:33:03.100Z"
+      },
+      {
+        "role": "user",
+        "content": "Quiero una cotización rápida",
+        "at": "2025-08-31T06:33:21.518Z"
+      },
+      {
+        "role": "bot",
+        "content": "Para una cotización rápida completa el formulario aquí: #contacto",
+        "at": "2025-08-31T06:33:21.518Z"
+      },
+      {
+        "role": "user",
+        "content": "Quiero hablar con un asesor humano",
+        "at": "2025-08-31T06:33:38.043Z"
+      },
+      {
+        "role": "bot",
+        "content": "Te conectaré con un asesor humano. Te escribiremos al correo registrado a la brevedad.\nPuedo conectarte con un asesor humano. Déjame tu consulta y te contactaremos por correo a la brevedad.",
+        "at": "2025-08-31T06:33:38.043Z"
+      },
+      {
+        "role": "user",
+        "content": "Sabes el Tiempo de ruracion por un cambio de Display",
+        "at": "2025-08-31T06:34:27.689Z"
+      },
+      {
+        "role": "bot",
+        "content": "Puedo ayudarte con: horarios, dirección, servicios y cotización rápida. También puedo conectarte con un asesor humano.",
+        "at": "2025-08-31T06:34:27.689Z"
+      },
+      {
+        "role": "user",
+        "content": "¿Cuál es la dirección de la tienda?",
+        "at": "2025-08-31T06:34:37.547Z"
+      },
+      {
+        "role": "bot",
+        "content": "Estamos en Cra. 81 #43-72, Local 1158, Laureles - Estadio, Medellín. Ver mapa: https://maps.google.com/?q=Cra.+81+%2343-72,+Local+1158+Laureles+-+Estadio,+Medell%C3%ADn",
+        "at": "2025-08-31T06:34:37.547Z"
+      },
+      {
+        "role": "user",
+        "content": "¿Cuáles son sus horarios?",
+        "at": "2025-08-31T06:35:08.758Z"
+      },
+      {
+        "role": "bot",
+        "content": "Nuestro horario de atención es de 9:00 a 19:00, lunes a sábado.",
+        "at": "2025-08-31T06:35:08.758Z"
+      }
+    ],
+    "escalated": true
   }
 ]
