@@ -45,15 +45,24 @@ export default function Contact() {
     <section id="contacto" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="overflow-hidden rounded-2xl border">
-          <iframe
-            title="Ubicación M’E Store"
-            src="https://www.google.com/maps?q=Cra.+81+%2343-72,+Local+1158+Laureles+-+Estadio,+Medell%C3%ADn,+Laureles,+Medell%C3%ADn,+Antioquia&output=embed"
-            width="100%"
-            height="380"
-            loading="lazy"
-            style={{ border: 0 }}
-            allowFullScreen
-          />
+          <div className="flex flex-col">
+            <div className="h-48 md:h-64">
+              <iframe
+                title="Ubicación M’E Store"
+                src="https://www.google.com/maps?q=Cra.+81+%2343-72,+Local+1158+Laureles+-+Estadio,+Medell%C3%ADn,+Laureles,+Medell%C3%ADn,+Antioquia&output=embed"
+                width="100%"
+                height="100%"
+                loading="lazy"
+                style={{ border: 0 }}
+                allowFullScreen
+              />
+            </div>
+            <div className="border-t p-4">
+              <h4 className="text-sm font-semibold">Comentarios y/o Sugerencias</h4>
+              <p className="mt-1 text-xs text-muted-foreground">Por favor inicia sesión con tu cuenta de Gmail para dejar tu comentario o sugerencia. Tu experiencia nos ayuda a mejorar.</p>
+              <CommentBox />
+            </div>
+          </div>
         </div>
         <div className="rounded-2xl border bg-card p-6 shadow-sm">
           <h3 className="text-xl font-semibold">Contacto rápido</h3>
