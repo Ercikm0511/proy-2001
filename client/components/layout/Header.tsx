@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, Smartphone, Moon, Sun, ShoppingCart, Phone } from "lucide-react";
+import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
-import { Link, useNavigate } from "react-router-dom";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
@@ -32,22 +31,16 @@ export default function Header({ theme, onToggleTheme }: Props) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-2">
-          <button onClick={() => (window.location.href = "/")} className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-              <Smartphone className="h-5 w-5" />
-            </div>
-            <span className="text-lg font-semibold tracking-tight">M’E Store</span>
+          <button
+            onClick={() => setLoginOpen(true)}
+            aria-label="Abrir inicio de sesión"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary"
+          >
+            <Smartphone className="h-5 w-5" />
           </button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button aria-label="Menú de contacto" className="rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground">
-                <Phone className="h-4 w-4" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuItem onClick={() => setLoginOpen(true)}>Iniciar Sesión</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <button onClick={() => (window.location.href = "/")} className="text-lg font-semibold tracking-tight">
+            M’E Store
+          </button>
         </div>
         <nav className="hidden items-center gap-6 md:flex">
           <a
