@@ -5,7 +5,7 @@ const items = [
   {
     icon: Wrench,
     title: "Reparación Profesional",
-    desc: "Rápida, garantizada y con repuestos originales.",
+    desc: "Rápida y garantizada con repuestos originales o de la más alta calidad.",
   },
   {
     icon: Smartphone,
