@@ -46,7 +46,7 @@ export default function TrackingModal({ open, onOpenChange }: { open: boolean; o
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="w-[95vw] max-w-xl">
         <DialogHeader>
-          <DialogTitle>Rastreo de pedido / reparación</DialogTitle>
+          <DialogTitle>Seguimiento de pedido / reparación</DialogTitle>
         </DialogHeader>
         <form onSubmit={submit} className="space-y-3">
           <div>
