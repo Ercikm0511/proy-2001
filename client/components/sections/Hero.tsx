@@ -56,7 +56,7 @@ export default function Hero() {
         >
           <div className="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-tr from-primary/20 to-transparent blur-2xl" />
           <img
-            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop"
+            src="https://cdn.builder.io/api/v1/image/assets%2F413c7c3972b24a46a4ba370035b392a8%2F4001a5b194794e41befb2112b4fe8e25?format=webp&width=800"
             alt="Smartphone premium"
             className="mx-auto h-auto w-full max-w-sm rotate-2 rounded-[2rem] bg-white p-6 shadow-2xl ring-1 ring-black/5 dark:bg-zinc-900"
           />
