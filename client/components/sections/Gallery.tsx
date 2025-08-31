@@ -3,7 +3,7 @@ import EmblaCarousel from "@/components/common/EmblaCarousel";
 type Slide = { type: "image" | "video"; src: string; alt?: string };
 
 const slides: Slide[] = [
-  { type: "image", src: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1600&auto=format&fit=crop", alt: "Reparación experta" },
+  { type: "video", src: "https://cdn.builder.io/o/assets%2F413c7c3972b24a46a4ba370035b392a8%2Ff735aac2d28c41618d5e031bcc80b1ef?alt=media&token=3e577a18-981d-4a46-ab49-eb38f2abac38&apiKey=413c7c3972b24a46a4ba370035b392a8" },
   { type: "video", src: "https://cdn.builder.io/o/assets%2F413c7c3972b24a46a4ba370035b392a8%2Ffbc348b8a72540a69038e46bae89f03d?alt=media&token=edf1a23b-e6ec-4144-83b2-ddebfecd2830&apiKey=413c7c3972b24a46a4ba370035b392a8" },
   { type: "image", src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1600&auto=format&fit=crop", alt: "Móviles destacados" },
 ];
