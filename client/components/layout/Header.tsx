@@ -91,7 +91,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
             )}
           </button>
           <Button className="shine-on-hover btn-glow" asChild>
-            <a href="#contacto">Agenda tu reparación</a>
+            <a href="#contacto">Agenda tu cotización</a>
           </Button>
         </div>
         <button
@@ -169,7 +169,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
               Ver carrito
             </button>
             <Button className="w-full mt-2" asChild>
-              <a href="#contacto">Agenda tu reparación</a>
+              <a href="#contacto">Agenda tu cotización</a>
             </Button>
           </div>
         </div>
