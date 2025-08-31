@@ -10,6 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import TrackingModal from "@/components/sections/TrackingModal";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
@@ -17,6 +18,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [trackOpen, setTrackOpen] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
   const navigate = useNavigate();
 
@@ -75,6 +77,12 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             Testimonios
           </a>
+          <button
+            onClick={() => setTrackOpen(true)}
+            className="text-sm text-muted-foreground transition hover:text-foreground"
+          >
+            Rastreo
+          </button>
           <a
             href="#contacto"
             className="text-sm text-muted-foreground hover:text-foreground"
@@ -133,6 +141,9 @@ export default function Header({ theme, onToggleTheme }: Props) {
         </DialogContent>
       </Dialog>
 
+      {/* Tracking Modal */}
+      <TrackingModal open={trackOpen} onOpenChange={setTrackOpen} />
+
       {open && (
         <div className="md:hidden">
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
@@ -190,6 +201,15 @@ export default function Header({ theme, onToggleTheme }: Props) {
             >
               Contacto
             </a>
+            <button
+              onClick={() => {
+                setTrackOpen(true);
+                setOpen(false);
+              }}
+              className="block w-full text-left text-sm"
+            >
+              Rastreo
+            </button>
             <button
               onClick={() => {
                 setCartOpen(true);
