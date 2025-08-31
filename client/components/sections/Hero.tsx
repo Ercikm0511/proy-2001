@@ -55,15 +55,10 @@ export default function Hero() {
           className="relative w-full max-w-md"
         >
           <div className="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-tr from-primary/20 to-transparent blur-2xl" />
-          <video
-            src="https://cdn.builder.io/o/assets%2F413c7c3972b24a46a4ba370035b392a8%2F14e690c82aa24fd5b37c11b3fc4acb18?alt=media&token=b8367caf-d4dc-43a2-ae44-15da96e322a8&apiKey=413c7c3972b24a46a4ba370035b392a8"
-            className="mx-auto mb-[-2px] h-auto w-full max-w-[252px] rotate-2 rounded-[2rem] bg-white pr-6 pl-[17px] py-0 shadow-2xl ring-1 ring-black/5 dark:bg-zinc-900"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-label="Video promocional M’E Store"
+          <img
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop"
+            alt="Smartphone premium"
+            className="mx-auto h-auto w-full max-w-sm rotate-2 rounded-[2rem] bg-white p-6 shadow-2xl ring-1 ring-black/5 dark:bg-zinc-900"
           />
           <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" />
         </motion.div>
