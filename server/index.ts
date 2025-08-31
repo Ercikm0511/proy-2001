@@ -29,6 +29,11 @@ export async function createServer() {
   app.get("/api/testimonials", testimonials.listTestimonials);
   app.post("/api/testimonials", testimonials.createTestimonial);
 
+  // Chatbot
+  const chat = await import("./routes/chat");
+  app.post("/api/chat/start", chat.startSession);
+  app.post("/api/chat/message", chat.postMessage);
+
   // Payments
   const { handleCheckout } = await import("./routes/checkout");
   app.post("/api/checkout", handleCheckout);
