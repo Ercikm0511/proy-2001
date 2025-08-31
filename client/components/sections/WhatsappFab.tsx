@@ -1,8 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { MessageCircle, Send, X, ChevronDown, User, Mail, Bot } from "lucide-react";
+import {
+  MessageCircle,
+  Send,
+  X,
+  ChevronDown,
+  User,
+  Mail,
+  Bot,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
- type Msg = { role: "user" | "bot"; content: string; at: string };
+type Msg = { role: "user" | "bot"; content: string; at: string };
 
 export default function WhatsappFab() {
   const [open, setOpen] = useState(false);
@@ -16,7 +24,8 @@ export default function WhatsappFab() {
   const listRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
+    if (listRef.current)
+      listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, open, collapsed]);
 
   const startChat = async (e?: React.FormEvent) => {
@@ -37,13 +46,21 @@ export default function WhatsappFab() {
   const send = async (text: string, options?: { escalate?: boolean }) => {
     if (!sessionId) return;
     setSending(true);
-    const userMsg: Msg = { role: "user", content: text, at: new Date().toISOString() };
+    const userMsg: Msg = {
+      role: "user",
+      content: text,
+      at: new Date().toISOString(),
+    };
     setMessages((m) => [...m, userMsg]);
     try {
       const r = await fetch("/api/chat/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, message: text, escalate: options?.escalate }),
+        body: JSON.stringify({
+          sessionId,
+          message: text,
+          escalate: options?.escalate,
+        }),
       });
       const j = await r.json();
       if (r.ok) {
@@ -99,9 +116,18 @@ export default function WhatsappFab() {
                 className="rounded p-1 hover:bg-white/10"
                 aria-label="Minimizar"
               >
-                <ChevronDown className={cn("h-4 w-4 transition", collapsed ? "rotate-180" : "")} />
+                <ChevronDown
+                  className={cn(
+                    "h-4 w-4 transition",
+                    collapsed ? "rotate-180" : "",
+                  )}
+                />
               </button>
-              <button onClick={() => setOpen(false)} className="rounded p-1 hover:bg-white/10" aria-label="Cerrar">
+              <button
+                onClick={() => setOpen(false)}
+                className="rounded p-1 hover:bg-white/10"
+                aria-label="Cerrar"
+              >
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -144,19 +170,31 @@ export default function WhatsappFab() {
                     Iniciar chat
                   </button>
                   <p className="text-[11px] text-muted-foreground">
-                    Al iniciar aceptas que guardemos tu nombre, correo y mensajes para seguimiento del servicio.
+                    Al iniciar aceptas que guardemos tu nombre, correo y
+                    mensajes para seguimiento del servicio.
                   </p>
                 </form>
               ) : (
                 <>
                   {/* Messages */}
-                  <div ref={listRef} className="flex-1 space-y-2 overflow-y-auto p-3">
+                  <div
+                    ref={listRef}
+                    className="flex-1 space-y-2 overflow-y-auto p-3"
+                  >
                     {messages.map((m, i) => (
-                      <div key={i} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start") }>
+                      <div
+                        key={i}
+                        className={cn(
+                          "flex",
+                          m.role === "user" ? "justify-end" : "justify-start",
+                        )}
+                      >
                         <div
                           className={cn(
                             "max-w-[80%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm",
-                            m.role === "user" ? "bg-blue-600 text-white" : "bg-muted text-foreground",
+                            m.role === "user"
+                              ? "bg-blue-600 text-white"
+                              : "bg-muted text-foreground",
                           )}
                         >
                           {m.content}
@@ -177,7 +215,11 @@ export default function WhatsappFab() {
                       </button>
                     ))}
                     <button
-                      onClick={() => send("Quiero hablar con un asesor humano", { escalate: true })}
+                      onClick={() =>
+                        send("Quiero hablar con un asesor humano", {
+                          escalate: true,
+                        })
+                      }
                       className="rounded-full border px-3 py-1 text-xs text-muted-foreground hover:bg-muted"
                     >
                       Asesor humano
@@ -185,7 +227,10 @@ export default function WhatsappFab() {
                   </div>
 
                   {/* Input */}
-                  <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t p-3">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex items-center gap-2 border-t p-3"
+                  >
                     <input
                       value={input}
                       onChange={(e) => setInput(e.target.value)}

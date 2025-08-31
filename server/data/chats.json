@@ -1,0 +1,28 @@
+[
+  {
+    "id": "1756621793723-qgscs93t9n",
+    "name": "Alberto Palencia",
+    "email": "Erickm051199@gmail.com",
+    "createdAt": "2025-08-31T06:29:53.723Z",
+    "messages": [
+      {
+        "role": "bot",
+        "content": "👋 Hola, bienvenido a M’E Store. Soy tu asistente virtual, ¿en qué puedo ayudarte hoy?",
+        "at": "2025-08-31T06:29:53.723Z"
+      }
+    ]
+  },
+  {
+    "id": "1756621793737-0cixkcl0815c",
+    "name": "Alberto Palencia",
+    "email": "Erickm051199@gmail.com",
+    "createdAt": "2025-08-31T06:29:53.737Z",
+    "messages": [
+      {
+        "role": "bot",
+        "content": "👋 Hola, bienvenido a M’E Store. Soy tu asistente virtual, ¿en qué puedo ayudarte hoy?",
+        "at": "2025-08-31T06:29:53.737Z"
+      }
+    ]
+  }
+]
