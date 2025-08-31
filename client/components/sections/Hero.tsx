@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -44,7 +45,7 @@ export default function Hero() {
               <a href="#contacto">Agenda tu reparación</a>
             </Button>
             <Button size="lg" variant="outline" className="sm:ml-2" asChild>
-              <a href="#tienda">Explora nuestros productos</a>
+              <Link to="/tienda">Explora nuestros productos</Link>
             </Button>
           </motion.div>
         </div>
