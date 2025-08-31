@@ -41,7 +41,7 @@ export default function Hero() {
             className="mt-8 flex flex-col items-center gap-3 sm:flex-row"
           >
             <Button size="lg" className="shine-on-hover btn-glow" asChild>
-              <a href="#contacto">Agenda tu cotización</a>
+              <a href="#contacto">Agenda tu reparación</a>
             </Button>
             <Button size="lg" variant="outline" className="sm:ml-2" asChild>
               <a href="#tienda">Explora nuestros productos</a>
