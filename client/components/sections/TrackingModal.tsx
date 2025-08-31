@@ -1,4 +1,9 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { useState } from "react";
 
 export type TrackingRecord = {
@@ -9,7 +14,13 @@ export type TrackingRecord = {
   estimado?: string | null;
 };
 
-export default function TrackingModal({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
+export default function TrackingModal({
+  open,
+  onOpenChange,
+}: {
+  open: boolean;
+  onOpenChange: (v: boolean) => void;
+}) {
   const [name, setName] = useState("");
   const [doc, setDoc] = useState("");
   const [guide, setGuide] = useState("");
@@ -30,13 +41,30 @@ export default function TrackingModal({ open, onOpenChange }: { open: boolean; o
       const res = await fetch("/api/rastreo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre: name.trim(), documento: doc.trim(), guiaFactura: guide.trim() }),
+        body: JSON.stringify({
+          nombre: name.trim(),
+          documento: doc.trim(),
+          guiaFactura: guide.trim(),
+        }),
       });
       const j = await res.json();
-      if (!res.ok) throw new Error(j?.error || "Los datos ingresados no corresponden a un pedido o reparación válida.");
-      setResult({ id: j.id, tipo: j.tipo, fecha: j.fecha, estado: j.estado, estimado: j.estimado ?? null });
+      if (!res.ok)
+        throw new Error(
+          j?.error ||
+            "Los datos ingresados no corresponden a un pedido o reparación válida.",
+        );
+      setResult({
+        id: j.id,
+        tipo: j.tipo,
+        fecha: j.fecha,
+        estado: j.estado,
+        estimado: j.estimado ?? null,
+      });
     } catch (err: any) {
-      setError(err.message || "Los datos ingresados no corresponden a un pedido o reparación válida.");
+      setError(
+        err.message ||
+          "Los datos ingresados no corresponden a un pedido o reparación válida.",
+      );
     } finally {
       setLoading(false);
     }
@@ -79,9 +107,7 @@ export default function TrackingModal({ open, onOpenChange }: { open: boolean; o
               required
             />
           </div>
-          {error && (
-            <p className="text-sm text-red-500">{error}</p>
-          )}
+          {error && <p className="text-sm text-red-500">{error}</p>}
           <button
             type="submit"
             disabled={loading}
@@ -100,7 +126,9 @@ export default function TrackingModal({ open, onOpenChange }: { open: boolean; o
               </div>
               <div>
                 <span className="text-muted-foreground">Fecha</span>
-                <p className="font-medium">{new Date(result.fecha).toLocaleString()}</p>
+                <p className="font-medium">
+                  {new Date(result.fecha).toLocaleString()}
+                </p>
               </div>
               <div>
                 <span className="text-muted-foreground">Estado</span>
