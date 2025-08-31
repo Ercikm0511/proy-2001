@@ -7,8 +7,8 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold">M’E Store</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Tecnología premium a tu alcance: reparación profesional, venta de equipos  móviles
-            certificados y accesorios de la mas alta calidad.
+            Tecnología premium a tu alcance: reparación profesional, venta de
+            equipos móviles certificados y accesorios de la mas alta calidad.
           </p>
           <div className="mt-4 flex items-center gap-3 text-muted-foreground">
             <Phone className="h-4 w-4" />
