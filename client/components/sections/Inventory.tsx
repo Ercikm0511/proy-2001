@@ -62,7 +62,9 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-export default function Inventory() {
+import { RefObject } from "react";
+
+export default function Inventory({ cartTargetRef }: { cartTargetRef?: RefObject<HTMLElement | SVGElement | HTMLButtonElement | null> } = {}) {
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState<"todos" | Product["category"]>("todos");
 
@@ -139,14 +141,34 @@ export default function Inventory() {
                 <Button
                   size="sm"
                   className="shine-on-hover"
-                  onClick={() =>
-                    add({
-                      id: p.id,
-                      name: p.name,
-                      price: p.price,
-                      image: p.image,
-                    })
-                  }
+                  onClick={(e) => {
+                    add({ id: p.id, name: p.name, price: p.price, image: p.image });
+                    const target = cartTargetRef?.current as HTMLElement | SVGElement | null;
+                    const fromEl = (e.currentTarget?.closest(".group") as HTMLElement) || (e.currentTarget as HTMLElement);
+                    if (!target || !fromEl) return;
+                    const imgEl = fromEl.querySelector("img") as HTMLImageElement | null;
+                    const startRect = (imgEl || fromEl).getBoundingClientRect();
+                    const endRect = (target as any).getBoundingClientRect();
+                    const clone = document.createElement("img");
+                    clone.src = p.image;
+                    clone.alt = p.name;
+                    clone.style.position = "fixed";
+                    clone.style.left = `${startRect.left}px`;
+                    clone.style.top = `${startRect.top}px`;
+                    clone.style.width = `${startRect.width}px`;
+                    clone.style.height = `${startRect.height}px`;
+                    clone.style.borderRadius = "12px";
+                    clone.style.zIndex = "9999";
+                    clone.style.pointerEvents = "none";
+                    document.body.appendChild(clone);
+                    const dx = endRect.left + endRect.width / 2 - (startRect.left + startRect.width / 2);
+                    const dy = endRect.top + endRect.height / 2 - (startRect.top + startRect.height / 2);
+                    const scale = Math.max(0.2, Math.min(0.35, (endRect.width / startRect.width) * 0.6));
+                    clone.animate([
+                      { transform: "translate(0,0) scale(1)", opacity: 1 },
+                      { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.3 },
+                    ], { duration: 650, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }).onfinish = () => clone.remove();
+                  }}
                 >
                   Agregar al carrito
                 </Button>
