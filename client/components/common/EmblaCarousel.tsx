@@ -47,7 +47,9 @@ export default function EmblaCarousel({
         if (i !== idx) {
           const vids = el.querySelectorAll("video");
           vids.forEach((v) => {
-            try { (v as HTMLVideoElement).pause(); } catch {}
+            try {
+              (v as HTMLVideoElement).pause();
+            } catch {}
           });
         }
       });
@@ -57,7 +59,9 @@ export default function EmblaCarousel({
         // Ensure no loop to respect original duration
         video.loop = false;
         video.muted = true;
-        try { video.currentTime = 0; } catch {}
+        try {
+          video.currentTime = 0;
+        } catch {}
         video.play().catch(() => {});
         const onEnded = () => {
           video.removeEventListener("ended", onEnded);
@@ -84,7 +88,9 @@ export default function EmblaCarousel({
     <div
       ref={emblaRef}
       onMouseEnter={stopTimer}
-      onMouseLeave={() => { if (!autoByVideo) startTimer(); }}
+      onMouseLeave={() => {
+        if (!autoByVideo) startTimer();
+      }}
       className="overflow-hidden"
     >
       <div className="flex">{children}</div>
