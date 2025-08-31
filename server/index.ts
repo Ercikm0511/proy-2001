@@ -34,6 +34,10 @@ export async function createServer() {
   app.post("/api/chat/start", chat.startSession);
   app.post("/api/chat/message", chat.postMessage);
 
+  // Tracking
+  const tracking = await import("./routes/tracking");
+  app.post("/api/rastreo", tracking.trackLookup);
+
   // Payments
   const { handleCheckout } = await import("./routes/checkout");
   app.post("/api/checkout", handleCheckout);
