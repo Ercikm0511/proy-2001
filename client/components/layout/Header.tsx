@@ -4,7 +4,12 @@ import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
 import { useNavigate } from "react-router-dom";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
@@ -38,7 +43,10 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             <Smartphone className="h-5 w-5" />
           </button>
-          <button onClick={() => (window.location.href = "/")} className="text-lg font-semibold tracking-tight">
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="text-lg font-semibold tracking-tight"
+          >
             M’E Store
           </button>
         </div>
@@ -116,7 +124,12 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <DialogHeader>
             <DialogTitle>Iniciar Sesión (Administración)</DialogTitle>
           </DialogHeader>
-          <LoginForm onSuccess={() => { setLoginOpen(false); navigate("/admin"); }} />
+          <LoginForm
+            onSuccess={() => {
+              setLoginOpen(false);
+              navigate("/admin");
+            }}
+          />
         </DialogContent>
       </Dialog>
 
@@ -235,8 +248,12 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
         />
       </div>
       {error && <p className="text-sm text-red-500">{error}</p>}
-      <Button type="submit" className="w-full">Entrar</Button>
-      <p className="text-xs text-muted-foreground">Acceso administrativo. No compartas estas credenciales.</p>
+      <Button type="submit" className="w-full">
+        Entrar
+      </Button>
+      <p className="text-xs text-muted-foreground">
+        Acceso administrativo. No compartas estas credenciales.
+      </p>
     </form>
   );
 }

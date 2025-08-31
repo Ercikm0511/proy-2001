@@ -12,7 +12,9 @@ export default function AdminDashboard() {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 md:px-6">
         <h1 className="text-2xl font-semibold">Acceso restringido</h1>
-        <p className="mt-2 text-muted-foreground">Inicia sesión como administrador para ver este panel.</p>
+        <p className="mt-2 text-muted-foreground">
+          Inicia sesión como administrador para ver este panel.
+        </p>
       </div>
     );
   }
@@ -31,12 +33,15 @@ export default function AdminDashboard() {
         </Button>
       </div>
       <p className="mt-2 text-sm text-muted-foreground">
-        Puedes previsualizar y gestionar secciones clave. Para cambios avanzados, indícame qué deseas editar.
+        Puedes previsualizar y gestionar secciones clave. Para cambios
+        avanzados, indícame qué deseas editar.
       </p>
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="rounded-2xl border p-4">
           <h2 className="text-lg font-semibold">Servicios</h2>
-          <p className="text-xs text-muted-foreground">Vista previa inmediata.</p>
+          <p className="text-xs text-muted-foreground">
+            Vista previa inmediata.
+          </p>
           <Services />
         </div>
         <div className="rounded-2xl border p-4">
