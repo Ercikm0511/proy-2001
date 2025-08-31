@@ -143,7 +143,7 @@ export default function Contact() {
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Pregunta la Cotización de tu reparación"
+                placeholder="Pregunta la cotización de tu reparación"
                 className="mt-1 h-24 w-full resize-none rounded-xl border bg-background px-3 py-2 text-sm outline-none ring-primary/30 focus:ring-2"
               />
             </div>
