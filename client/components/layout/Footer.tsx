@@ -1,4 +1,18 @@
-import { Facebook, Instagram, Phone, ShieldCheck, Tiktok } from "lucide-react";
+import { Facebook, Instagram, Phone, ShieldCheck } from "lucide-react";
+
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 256 256"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M168.1 32c8.6 14.4 22.4 26.1 39.9 30.7v33.2c-14.7-1-28.5-5.7-40.8-13.1v55.2c0 34.8-28.2 63-63 63s-63-28.2-63-63 28.2-63 63-63c3.1 0 6.1.2 9.1.7v33.9a29.5 29.5 0 0 0-9.1-1.4c-16.2 0-29.3 13.1-29.3 29.3s13.1 29.3 29.3 29.3 29.3-13.1 29.3-29.3V32h34.6z" />
+    </svg>
+  );
+}
 
 export default function Footer() {
   return (
@@ -72,7 +86,7 @@ export default function Footer() {
               <Instagram className="h-5 w-5" />
             </a>
             <a aria-label="TikTok" href="#" className="hover:text-foreground">
-              <Tiktok className="h-5 w-5" />
+              <TikTokIcon className="h-5 w-5" />
             </a>
             <a aria-label="Facebook" href="#" className="hover:text-foreground">
               <Facebook className="h-5 w-5" />
