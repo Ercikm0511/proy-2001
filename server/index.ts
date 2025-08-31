@@ -19,6 +19,11 @@ export async function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Phones directory
+  const phones = await import("./routes/phones");
+  app.get("/api/phone/brands", phones.getBrands);
+  app.get("/api/phone/models", phones.getModels);
+
   // Payments
   const { handleCheckout } = await import("./routes/checkout");
   app.post("/api/checkout", handleCheckout);
