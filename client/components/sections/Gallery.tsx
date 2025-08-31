@@ -17,9 +17,9 @@ export default function Gallery() {
             {s.type === "image" ? (
               <img src={s.src} alt={s.alt} className="h-[60vh] w-full object-cover md:h-[70vh]" loading="eager" fetchPriority="high" decoding="async" />
             ) : (
-              <video src={s.src} className="h-[60vh] w-full object-cover md:h-[70vh]" autoPlay loop muted playsInline preload="auto" />
+              <video src={s.src} className="h-[80vh] w-full object-cover md:h-[90vh]" autoPlay loop muted playsInline preload="auto" />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
           </div>
         ))}
       </EmblaCarousel>
