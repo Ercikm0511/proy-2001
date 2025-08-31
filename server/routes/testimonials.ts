@@ -12,7 +12,11 @@ function ensureFile() {
 
 function readAll(): any[] {
   ensureFile();
-  try { return JSON.parse(fs.readFileSync(FILE, "utf8")); } catch { return []; }
+  try {
+    return JSON.parse(fs.readFileSync(FILE, "utf8"));
+  } catch {
+    return [];
+  }
 }
 
 function writeAll(list: any[]) {
@@ -21,7 +25,9 @@ function writeAll(list: any[]) {
 }
 
 async function verifyIdToken(idToken: string) {
-  const r = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+  const r = await fetch(
+    `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`,
+  );
   if (!r.ok) return null;
   const info: any = await r.json();
   const expectedAud = process.env.GOOGLE_CLIENT_ID;
@@ -30,17 +36,26 @@ async function verifyIdToken(idToken: string) {
 }
 
 export async function listTestimonials(_req: Request, res: Response) {
-  const list = readAll().sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  const list = readAll().sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
   res.json({ testimonials: list });
 }
 
 export async function createTestimonial(req: Request, res: Response) {
   const { idToken, text } = req.body as { idToken?: string; text?: string };
-  if (!idToken || !text) return res.status(400).json({ error: "idToken and text required" });
+  if (!idToken || !text)
+    return res.status(400).json({ error: "idToken and text required" });
   const user = await verifyIdToken(idToken);
   if (!user) return res.status(401).json({ error: "invalid token" });
   const list = readAll();
-  const item = { id: `${Date.now()}-${Math.random().toString(36).slice(2)}`, name: user.name || user.email, email: user.email, text, createdAt: new Date().toISOString() };
+  const item = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    name: user.name || user.email,
+    email: user.email,
+    text,
+    createdAt: new Date().toISOString(),
+  };
   list.push(item);
   writeAll(list);
   res.status(201).json({ ok: true, item });

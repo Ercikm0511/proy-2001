@@ -7,7 +7,11 @@ export async function getBrands(_req: Request, res: Response) {
     const r = await fetch(`${BASE}/brands`);
     if (!r.ok) return res.status(502).json({ error: "upstream error" });
     const j = await r.json();
-    const brands = (j?.data || []).map((b: any) => ({ name: b.brand_name, slug: b.brand_slug, count: b.device_count }));
+    const brands = (j?.data || []).map((b: any) => ({
+      name: b.brand_name,
+      slug: b.brand_slug,
+      count: b.device_count,
+    }));
     res.json({ brands });
   } catch (e) {
     res.status(500).json({ error: "server error" });
@@ -21,8 +25,11 @@ export async function getModels(req: Request, res: Response) {
   try {
     let page = 1;
     const models: { name: string; slug: string }[] = [];
-    while (page <= 3) { // limit pages for performance
-      const r = await fetch(`${BASE}/brands/${encodeURIComponent(slug)}?page=${page}`);
+    while (page <= 3) {
+      // limit pages for performance
+      const r = await fetch(
+        `${BASE}/brands/${encodeURIComponent(slug)}?page=${page}`,
+      );
       if (!r.ok) break;
       const j = await r.json();
       const phones = j?.data?.phones || [];
@@ -30,7 +37,9 @@ export async function getModels(req: Request, res: Response) {
       if (!j?.data?.phones?.length || !j?.data?.next) break;
       page++;
     }
-    const filtered = q ? models.filter((m) => m.name.toLowerCase().includes(q)) : models;
+    const filtered = q
+      ? models.filter((m) => m.name.toLowerCase().includes(q))
+      : models;
     res.json({ models: filtered });
   } catch (e) {
     res.status(500).json({ error: "server error" });

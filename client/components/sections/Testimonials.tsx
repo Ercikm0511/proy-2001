@@ -2,12 +2,26 @@ import EmblaCarousel from "@/components/common/EmblaCarousel";
 import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
-type Testimonial = { id: string; name: string; text: string; createdAt: string };
+type Testimonial = {
+  id: string;
+  name: string;
+  text: string;
+  createdAt: string;
+};
 
 const FALLBACK = [
-  { name: "Laura G.", text: "Servicio rapidísimo y con garantía. Mi iPhone quedó como nuevo." },
-  { name: "Carlos M.", text: "Excelente atención y productos originales. 100% recomendados." },
-  { name: "Ana P.", text: "Encontré el accesorio perfecto y me asesoraron increíble." },
+  {
+    name: "Laura G.",
+    text: "Servicio rapidísimo y con garantía. Mi iPhone quedó como nuevo.",
+  },
+  {
+    name: "Carlos M.",
+    text: "Excelente atención y productos originales. 100% recomendados.",
+  },
+  {
+    name: "Ana P.",
+    text: "Encontré el accesorio perfecto y me asesoraron increíble.",
+  },
 ];
 
 export default function Testimonials() {
@@ -22,7 +36,12 @@ export default function Testimonials() {
 
   const list = items.length
     ? items
-    : FALLBACK.map((f, i) => ({ id: String(i), name: f.name, text: f.text, createdAt: new Date().toISOString() }));
+    : FALLBACK.map((f, i) => ({
+        id: String(i),
+        name: f.name,
+        text: f.text,
+        createdAt: new Date().toISOString(),
+      }));
 
   return (
     <section id="testimonios" className="mx-auto max-w-7xl px-4 py-16 md:px-6">
@@ -30,11 +49,18 @@ export default function Testimonials() {
       <div className="mt-6">
         <EmblaCarousel>
           {list.map((t) => (
-            <div key={t.id} className="min-w-full px-1 sm:min-w-[50%] lg:min-w-[33.333%]">
+            <div
+              key={t.id}
+              className="min-w-full px-1 sm:min-w-[50%] lg:min-w-[33.333%]"
+            >
               <div className="mr-4 rounded-2xl border bg-card p-6 shadow-sm">
                 <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-xs font-medium text-primary">
-                    {t.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                    {t.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")
+                      .slice(0, 2)}
                   </div>
                   <div>
                     <p className="text-sm font-medium">{t.name}</p>

@@ -1,11 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-declare global { interface Window { google?: any } }
+declare global {
+  interface Window {
+    google?: any;
+  }
+}
 
 export default function CommentBox() {
   const [idToken, setIdToken] = useState<string | null>(null);
-  const [user, setUser] = useState<{ name?: string; email?: string } | null>(null);
+  const [user, setUser] = useState<{ name?: string; email?: string } | null>(
+    null,
+  );
   const [text, setText] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const btnRef = useRef<HTMLDivElement | null>(null);
@@ -37,9 +43,17 @@ export default function CommentBox() {
           }
         },
       });
-      window.google.accounts.id.renderButton(btnRef.current, { theme: "outline", size: "large" });
+      window.google.accounts.id.renderButton(btnRef.current, {
+        theme: "outline",
+        size: "large",
+      });
     };
-    const t = setInterval(() => { if (window.google) { clearInterval(t); init(); } }, 200);
+    const t = setInterval(() => {
+      if (window.google) {
+        clearInterval(t);
+        init();
+      }
+    }, 200);
     return () => clearInterval(t);
   }, []);
 
@@ -47,7 +61,11 @@ export default function CommentBox() {
     if (!idToken || !text.trim()) return;
     setSubmitting(true);
     try {
-      const res = await fetch("/api/testimonials", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ idToken, text }) });
+      const res = await fetch("/api/testimonials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken, text }),
+      });
       if (res.ok) {
         setText("");
         alert("Comentario enviado y publicado");
@@ -55,7 +73,9 @@ export default function CommentBox() {
         const j = await res.json().catch(() => ({}));
         alert(j?.error || "No se pudo enviar el comentario");
       }
-    } finally { setSubmitting(false); }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -65,7 +85,9 @@ export default function CommentBox() {
           <div ref={btnRef} />
         </div>
       ) : (
-        <div className="text-xs text-muted-foreground">Conectado como {user?.name || user?.email}</div>
+        <div className="text-xs text-muted-foreground">
+          Conectado como {user?.name || user?.email}
+        </div>
       )}
       <textarea
         placeholder="Escribe tu comentario..."
@@ -75,7 +97,12 @@ export default function CommentBox() {
         disabled={!idToken}
       />
       <div className="flex justify-end">
-        <Button onClick={submit} disabled={!idToken || !text.trim() || submitting}>Publicar</Button>
+        <Button
+          onClick={submit}
+          disabled={!idToken || !text.trim() || submitting}
+        >
+          Publicar
+        </Button>
       </div>
     </div>
   );

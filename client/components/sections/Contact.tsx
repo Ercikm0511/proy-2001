@@ -1,7 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useState } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { ChevronsUpDown, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import CommentBox from "@/components/sections/CommentBox";
@@ -15,23 +26,37 @@ export default function Contact() {
   const [modelOpen, setModelOpen] = useState(false);
   const [brands, setBrands] = useState<{ name: string; slug: string }[]>([]);
   const [models, setModels] = useState<{ name: string; slug: string }[]>([]);
-  const [brand, setBrand] = useState<{ name: string; slug: string } | null>(null);
-  const [model, setModel] = useState<{ name: string; slug: string } | null>(null);
+  const [brand, setBrand] = useState<{ name: string; slug: string } | null>(
+    null,
+  );
+  const [model, setModel] = useState<{ name: string; slug: string } | null>(
+    null,
+  );
   const [brandQuery, setBrandQuery] = useState("");
   const [modelQuery, setModelQuery] = useState("");
 
   useEffect(() => {
     if (!brandOpen || brands.length) return;
-    fetch("/api/phone/brands").then(r => r.json()).then(j => setBrands(j.brands || [])).catch(() => setBrands([]));
+    fetch("/api/phone/brands")
+      .then((r) => r.json())
+      .then((j) => setBrands(j.brands || []))
+      .catch(() => setBrands([]));
   }, [brandOpen, brands.length]);
 
   useEffect(() => {
-    if (!brand) { setModels([]); setModel(null); return; }
+    if (!brand) {
+      setModels([]);
+      setModel(null);
+      return;
+    }
     if (!modelOpen) return;
     const url = new URL(window.location.origin + "/api/phone/models");
     url.searchParams.set("brand", brand.slug);
     if (modelQuery) url.searchParams.set("q", modelQuery);
-    fetch(url.toString()).then(r => r.json()).then(j => setModels(j.models || [])).catch(() => setModels([]));
+    fetch(url.toString())
+      .then((r) => r.json())
+      .then((j) => setModels(j.models || []))
+      .catch(() => setModels([]));
   }, [brand, modelOpen, modelQuery]);
 
   const waMessage = encodeURIComponent(
@@ -59,18 +84,28 @@ export default function Contact() {
               />
             </div>
             <div className="border-t p-4">
-              <h4 className="text-sm font-semibold">Comentarios y/o Sugerencias</h4>
-              <p className="mt-1 text-xs text-muted-foreground">Por favor inicia sesión con tu cuenta de Gmail para dejar tu comentario o sugerencia. Tu experiencia nos ayuda a mejorar.</p>
+              <h4 className="text-sm font-semibold">
+                Comentarios y/o Sugerencias
+              </h4>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Por favor inicia sesión con tu cuenta de Gmail para dejar tu
+                comentario o sugerencia. Tu experiencia nos ayuda a mejorar.
+              </p>
               <CommentBox />
             </div>
           </div>
         </div>
         <div className="rounded-2xl border bg-card p-6 shadow-sm">
           <h3 className="text-xl font-semibold">Contacto rápido</h3>
-          <p className="mt-1 text-sm text-muted-foreground">Envíanos un mensaje y te responderemos a la brevedad.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Envíanos un mensaje y te responderemos a la brevedad.
+          </p>
           <form
             className="mt-6 space-y-3"
-            onSubmit={(e) => { e.preventDefault(); window.open(`https://wa.me/?text=${waMessage}`, "_blank"); }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              window.open(`https://wa.me/?text=${waMessage}`, "_blank");
+            }}
           >
             <div>
               <label className="text-sm">Nombre y Apellido</label>
@@ -98,23 +133,52 @@ export default function Contact() {
               <label className="text-sm">Marca de Teléfono</label>
               <Popover open={brandOpen} onOpenChange={setBrandOpen}>
                 <PopoverTrigger asChild>
-                  <button type="button" className="mt-1 flex w-full items-center justify-between rounded-xl border bg-background px-3 py-2 text-left text-sm">
+                  <button
+                    type="button"
+                    className="mt-1 flex w-full items-center justify-between rounded-xl border bg-background px-3 py-2 text-left text-sm"
+                  >
                     <span>{brand?.name || "Selecciona una marca"}</span>
                     <ChevronsUpDown className="h-4 w-4 opacity-50" />
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[360px] p-0">
                   <Command>
-                    <CommandInput placeholder="Buscar marca..." value={brandQuery} onValueChange={setBrandQuery} />
+                    <CommandInput
+                      placeholder="Buscar marca..."
+                      value={brandQuery}
+                      onValueChange={setBrandQuery}
+                    />
                     <CommandList>
                       <CommandEmpty>No se encontraron marcas</CommandEmpty>
                       <CommandGroup>
-                        {(brands || []).filter(b => !brandQuery || b.name.toLowerCase().includes(brandQuery.toLowerCase())).map((b) => (
-                          <CommandItem key={b.slug} onSelect={() => { setBrand(b); setBrandOpen(false); setModel(null); }}>
-                            <Check className={cn("mr-2 h-4 w-4", brand?.slug === b.slug ? "opacity-100" : "opacity-0")} />
-                            {b.name}
-                          </CommandItem>
-                        ))}
+                        {(brands || [])
+                          .filter(
+                            (b) =>
+                              !brandQuery ||
+                              b.name
+                                .toLowerCase()
+                                .includes(brandQuery.toLowerCase()),
+                          )
+                          .map((b) => (
+                            <CommandItem
+                              key={b.slug}
+                              onSelect={() => {
+                                setBrand(b);
+                                setBrandOpen(false);
+                                setModel(null);
+                              }}
+                            >
+                              <Check
+                                className={cn(
+                                  "mr-2 h-4 w-4",
+                                  brand?.slug === b.slug
+                                    ? "opacity-100"
+                                    : "opacity-0",
+                                )}
+                              />
+                              {b.name}
+                            </CommandItem>
+                          ))}
                       </CommandGroup>
                     </CommandList>
                   </Command>
@@ -125,20 +189,46 @@ export default function Contact() {
               <label className="text-sm">Modelo de Teléfono</label>
               <Popover open={modelOpen} onOpenChange={setModelOpen}>
                 <PopoverTrigger asChild>
-                  <button type="button" disabled={!brand} className="mt-1 flex w-full items-center justify-between rounded-xl border bg-background px-3 py-2 text-left text-sm disabled:opacity-50">
-                    <span>{model?.name || (brand ? "Selecciona un modelo" : "Primero elige una marca")}</span>
+                  <button
+                    type="button"
+                    disabled={!brand}
+                    className="mt-1 flex w-full items-center justify-between rounded-xl border bg-background px-3 py-2 text-left text-sm disabled:opacity-50"
+                  >
+                    <span>
+                      {model?.name ||
+                        (brand
+                          ? "Selecciona un modelo"
+                          : "Primero elige una marca")}
+                    </span>
                     <ChevronsUpDown className="h-4 w-4 opacity-50" />
                   </button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[360px] p-0">
                   <Command>
-                    <CommandInput placeholder="Buscar modelo..." value={modelQuery} onValueChange={setModelQuery} />
+                    <CommandInput
+                      placeholder="Buscar modelo..."
+                      value={modelQuery}
+                      onValueChange={setModelQuery}
+                    />
                     <CommandList>
                       <CommandEmpty>No se encontraron modelos</CommandEmpty>
                       <CommandGroup>
                         {(models || []).map((m) => (
-                          <CommandItem key={m.slug} onSelect={() => { setModel(m); setModelOpen(false); }}>
-                            <Check className={cn("mr-2 h-4 w-4", model?.slug === m.slug ? "opacity-100" : "opacity-0")} />
+                          <CommandItem
+                            key={m.slug}
+                            onSelect={() => {
+                              setModel(m);
+                              setModelOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                model?.slug === m.slug
+                                  ? "opacity-100"
+                                  : "opacity-0",
+                              )}
+                            />
                             {m.name}
                           </CommandItem>
                         ))}
@@ -158,9 +248,13 @@ export default function Contact() {
               />
             </div>
             <div className="flex gap-2 pt-2">
-              <Button type="submit" className="shine-on-hover btn-glow">Enviar por WhatsApp</Button>
+              <Button type="submit" className="shine-on-hover btn-glow">
+                Enviar por WhatsApp
+              </Button>
               <Button variant="outline" asChild>
-                <a href={`mailto:mestore1204@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`}>
+                <a
+                  href={`mailto:mestore1204@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`}
+                >
                   Enviar por correo
                 </a>
               </Button>
