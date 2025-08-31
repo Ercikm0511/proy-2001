@@ -11,13 +11,13 @@ const slides: Slide[] = [
 export default function Gallery() {
   return (
     <section id="galeria" className="relative mt-6">
-      <EmblaCarousel>
+      <EmblaCarousel autoByVideo autoplayMs={4500}>
         {slides.map((s) => (
           <div key={s.src} className="relative min-w-full">
             {s.type === "image" ? (
-              <img src={s.src} alt={s.alt} className="h-[60vh] w-full object-cover md:h-[70vh]" loading="eager" fetchPriority="high" decoding="async" />
+              <img src={s.src} alt={s.alt} className="h-[80vh] w-full object-cover md:h-[90vh]" loading="eager" fetchPriority="high" decoding="async" />
             ) : (
-              <video src={s.src} className="h-[80vh] w-full object-cover md:h-[90vh]" autoPlay loop muted playsInline preload="auto" />
+              <video src={s.src} className="h-[80vh] w-full object-cover md:h-[90vh]" autoPlay muted playsInline preload="auto" />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
           </div>
