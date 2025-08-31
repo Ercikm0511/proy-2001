@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Thanks from "./pages/Thanks";
+import AdminDashboard from "./pages/AdminDashboard";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsappFab from "@/components/sections/WhatsappFab";
@@ -134,6 +135,7 @@ const App = () => {
                   <Route path="/" element={<Index />} />
                   <Route path="/thanks" element={<Thanks />} />
                   <Route path="/tienda" element={<StoreModal />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
