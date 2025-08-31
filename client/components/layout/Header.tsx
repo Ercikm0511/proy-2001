@@ -81,7 +81,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
             onClick={() => setTrackOpen(true)}
             className="text-sm text-muted-foreground transition hover:text-foreground"
           >
-            Rastreo
+            Seguimiento
           </button>
           <a
             href="#contacto"
@@ -208,7 +208,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
               }}
               className="block w-full text-left text-sm"
             >
-              Rastreo
+              Seguimiento
             </button>
             <button
               onClick={() => {
