@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Phone, ShieldCheck, Twitter } from "lucide-react";
+import { Facebook, Instagram, Phone, ShieldCheck, Tiktok } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -71,8 +71,8 @@ export default function Footer() {
             >
               <Instagram className="h-5 w-5" />
             </a>
-            <a aria-label="Twitter" href="#" className="hover:text-foreground">
-              <Twitter className="h-5 w-5" />
+            <a aria-label="TikTok" href="#" className="hover:text-foreground">
+              <Tiktok className="h-5 w-5" />
             </a>
             <a aria-label="Facebook" href="#" className="hover:text-foreground">
               <Facebook className="h-5 w-5" />
