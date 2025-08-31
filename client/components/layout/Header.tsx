@@ -1,15 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
+import { Menu, Smartphone, Moon, Sun, ShoppingCart, Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
+import { Link, useNavigate } from "react-router-dom";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
 export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -26,14 +31,24 @@ export default function Header({ theme, onToggleTheme }: Props) {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Smartphone className="h-5 w-5" />
-          </div>
-          <span className="text-lg font-semibold tracking-tight">
-            M’E Store
-          </span>
-        </a>
+        <div className="flex items-center gap-2">
+          <button onClick={() => (window.location.href = "/")} className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Smartphone className="h-5 w-5" />
+            </div>
+            <span className="text-lg font-semibold tracking-tight">M’E Store</span>
+          </button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button aria-label="Menú de contacto" className="rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground">
+                <Phone className="h-4 w-4" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem onClick={() => setLoginOpen(true)}>Iniciar Sesión</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <nav className="hidden items-center gap-6 md:flex">
           <a
             href="#servicios"
@@ -102,6 +117,16 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <Menu className="h-6 w-6" />
         </button>
       </div>
+      {/* Login Modal */}
+      <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Iniciar Sesión (Administración)</DialogTitle>
+          </DialogHeader>
+          <LoginForm onSuccess={() => { setLoginOpen(false); navigate("/admin"); }} />
+        </DialogContent>
+      </Dialog>
+
       {open && (
         <div className="md:hidden">
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
@@ -175,5 +200,50 @@ export default function Header({ theme, onToggleTheme }: Props) {
         </div>
       )}
     </header>
+  );
+}
+
+function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  return (
+    <form
+      className="space-y-3"
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (email === "Mestore1204@gmail.com" && pass === "St0r3.1204") {
+          localStorage.setItem("isAdmin", "true");
+          setError(null);
+          onSuccess();
+        } else {
+          setError("Credenciales inválidas");
+        }
+      }}
+    >
+      <div>
+        <label className="text-sm">Correo</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm outline-none ring-primary/30 focus:ring-2"
+          required
+        />
+      </div>
+      <div>
+        <label className="text-sm">Contraseña</label>
+        <input
+          type="password"
+          value={pass}
+          onChange={(e) => setPass(e.target.value)}
+          className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm outline-none ring-primary/30 focus:ring-2"
+          required
+        />
+      </div>
+      {error && <p className="text-sm text-red-500">{error}</p>}
+      <Button type="submit" className="w-full">Entrar</Button>
+      <p className="text-xs text-muted-foreground">Acceso administrativo. No compartas estas credenciales.</p>
+    </form>
   );
 }
