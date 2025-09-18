@@ -12,6 +12,10 @@ export default function Header({ theme, onToggleTheme }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Hide header when viewing admin panel
+  if (location.pathname === "/admin" || location.pathname.startsWith("/admin/")) return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
