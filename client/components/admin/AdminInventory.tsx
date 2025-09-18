@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useInventory } from "@/state/inventory";
 import { Button } from "@/components/ui/button";
 
