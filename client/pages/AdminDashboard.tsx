@@ -31,7 +31,7 @@ export default function AdminDashboard() {
     return (
     <div className="mx-auto max-w-7xl px-0 py-4 md:px-0">
       {/* Admin toolbar */}
-      <AdminToolbar currentTab={tab} onTabChange={setTab} onAddClick={scrollToInventory} onTogglePreview={() => setShowPreview((s) => !s)} showPreview={showPreview} />
+      <AdminToolbar currentTab={tab} onTabChange={setTab} onTogglePreview={() => setShowPreview((s) => !s)} showPreview={showPreview} />
 
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
         <h1 className="text-2xl font-semibold">Panel Administrativo</h1>
