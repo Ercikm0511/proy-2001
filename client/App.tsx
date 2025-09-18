@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Thanks from "./pages/Thanks";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import Tracking from "./pages/Tracking";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsappFab from "@/components/sections/WhatsappFab";
@@ -135,6 +137,8 @@ const App = () => {
                   <Route path="/" element={<Index />} />
                   <Route path="/thanks" element={<Thanks />} />
                   <Route path="/tienda" element={<Store />} />
+                  <Route path="/seguimiento" element={<Tracking />} />
+                  <Route path="/admin-login" element={<AdminLogin />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
