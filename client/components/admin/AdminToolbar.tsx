@@ -11,8 +11,8 @@ export default function AdminToolbar({
   onTogglePreview,
   showPreview,
 }: {
-  currentTab: "inventory" | "store";
-  onTabChange: (t: "inventory" | "store") => void;
+  currentTab: "inventory" | "store" | "clients" | "devices" | "repairs" | "sales";
+  onTabChange: (t: "inventory" | "store" | "clients" | "devices" | "repairs" | "sales") => void;
   onAddClick: () => void;
   onTogglePreview: () => void;
   showPreview: boolean;
