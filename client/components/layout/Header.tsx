@@ -29,16 +29,20 @@ export default function Header({ theme, onToggleTheme }: Props) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-2">
-          <Link
-            to="/admin-login"
+          <a
+            href="/admin-login"
             aria-label="Abrir inicio de sesión"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary"
           >
             <Smartphone className="h-5 w-5" />
-          </Link>
-          <Link to="/" aria-label="Inicio" className="text-lg font-semibold tracking-tight">
-            <span className="sr-only">Inicio</span>
-          </Link>
+          </a>
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="text-lg font-semibold tracking-tight"
+            aria-label="Ir al menú principal"
+          >
+            M’E Store
+          </button>
         </div>
         <nav className="hidden items-center gap-6 md:flex">
           <a
