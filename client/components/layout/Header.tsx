@@ -3,7 +3,7 @@ import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
 import { useNavigate } from "react-router-dom";
-import Button from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
