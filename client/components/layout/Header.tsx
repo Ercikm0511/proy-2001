@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
