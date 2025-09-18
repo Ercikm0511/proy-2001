@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useNavigate, Link } from "react-router-dom";
-import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
+import { Menu, Smartphone, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 
 export default function AdminToolbar({
