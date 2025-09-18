@@ -11,7 +11,7 @@ export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [tab, setTab] = useState<"inventory" | "store">("inventory");
   const [showPreview, setShowPreview] = useState(true);
-  const inventoryRef = React.createRef<HTMLDivElement>();
+  const inventoryRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setIsAdmin(localStorage.getItem("isAdmin") === "true");
