@@ -101,10 +101,14 @@ export function InventoryProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateProduct = (id: string, patch: Partial<Omit<Product, "id">>) => {
+    setProducts((s) => s.map((x) => (x.id === id ? { ...x, ...patch } : x)));
+  };
+
   const removeProduct = (id: string) => setProducts((s) => s.filter((p) => p.id !== id));
 
   return (
-    <InventoryContext.Provider value={{ products, addProduct, updateStock, decrementStock, removeProduct }}>
+    <InventoryContext.Provider value={{ products, addProduct, updateProduct, updateStock, decrementStock, removeProduct }}>
       {children}
     </InventoryContext.Provider>
   );
