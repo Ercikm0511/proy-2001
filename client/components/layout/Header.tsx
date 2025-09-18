@@ -36,12 +36,9 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             <Smartphone className="h-5 w-5" />
           </Link>
-          <button
-            onClick={() => navigate("/")}
-            className="text-lg font-semibold tracking-tight"
-          >
-            M’E Store
-          </button>
+          <Link to="/" aria-label="Inicio" className="text-lg font-semibold tracking-tight">
+            <span className="sr-only">Inicio</span>
+          </Link>
         </div>
         <nav className="hidden items-center gap-6 md:flex">
           <a
