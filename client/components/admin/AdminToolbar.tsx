@@ -7,13 +7,11 @@ import { useState } from "react";
 export default function AdminToolbar({
   currentTab,
   onTabChange,
-  onAddClick,
   onTogglePreview,
   showPreview,
 }: {
   currentTab: "inventory" | "store" | "clients" | "devices" | "repairs" | "sales";
   onTabChange: (t: "inventory" | "store" | "clients" | "devices" | "repairs" | "sales") => void;
-  onAddClick: () => void;
   onTogglePreview: () => void;
   showPreview: boolean;
 }) {
@@ -44,10 +42,6 @@ export default function AdminToolbar({
           <a href="/admin-login" aria-label="Abrir inicio de sesión" className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
             <Smartphone className="h-5 w-5" />
           </a>
-          <button onClick={() => (window.location.href = "/")} className="text-lg font-semibold tracking-tight" aria-label="Ir al menú principal">
-            M’E Store
-          </button>
-
           <nav className="hidden ml-6 items-center gap-4 md:flex">
             <button className={cn("rounded-md px-3 py-1", currentTab === "inventory" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("inventory")}>
               Inventario
@@ -69,9 +63,6 @@ export default function AdminToolbar({
             </button>
           </nav>
 
-          <div className="ml-4 hidden md:block">
-            <Button size="sm" onClick={onAddClick}>Agregar producto</Button>
-          </div>
         </div>
 
         <div className="flex items-center gap-2">

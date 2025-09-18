@@ -29,12 +29,7 @@ export default function AdminDashboard() {
     );
   }
 
-  const scrollToInventory = () => {
-    if (inventoryRef.current) inventoryRef.current.scrollIntoView({ behavior: "smooth" });
-    setTab("inventory");
-  };
-
-  return (
+    return (
     <div className="mx-auto max-w-7xl px-0 py-4 md:px-0">
       {/* Admin toolbar */}
       <AdminToolbar currentTab={tab} onTabChange={setTab} onAddClick={scrollToInventory} onTogglePreview={() => setShowPreview((s) => !s)} showPreview={showPreview} />
