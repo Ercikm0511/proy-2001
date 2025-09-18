@@ -55,7 +55,6 @@ export default function AdminToolbar({
             <button className={cn("rounded-md px-3 py-1", currentTab === "store" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("store")}>
               Tienda
             </button>
-            <Link to="/tienda" className="text-sm text-muted-foreground hover:text-foreground">Ver tienda</Link>
           </nav>
 
           <div className="ml-4 hidden md:block">
