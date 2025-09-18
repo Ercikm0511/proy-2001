@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
@@ -29,17 +29,15 @@ export default function Header({ theme, onToggleTheme }: Props) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-2">
-          <a
-            href="/admin-login"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/admin-login"
             aria-label="Abrir inicio de sesión"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary"
           >
             <Smartphone className="h-5 w-5" />
-          </a>
+          </Link>
           <button
-            onClick={() => (window.location.href = "/")}
+            onClick={() => navigate("/")}
             className="text-lg font-semibold tracking-tight"
           >
             M’E Store
@@ -58,28 +56,18 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             Galería
           </a>
-          <a
-            href="/tienda"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground"
-          >
+          <Link to="/tienda" className="text-sm text-muted-foreground hover:text-foreground">
             Tienda
-          </a>
+          </Link>
           <a
             href="#testimonios"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             Testimonios
           </a>
-          <a
-            href="/seguimiento"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-muted-foreground transition hover:text-foreground"
-          >
+          <Link to="/seguimiento" className="text-sm text-muted-foreground transition hover:text-foreground">
             Seguimiento
-          </a>
+          </Link>
           <a
             href="#contacto"
             className="text-sm text-muted-foreground hover:text-foreground"
@@ -144,52 +132,24 @@ export default function Header({ theme, onToggleTheme }: Props) {
                 )}
               </button>
             </div>
-            <a
-              onClick={() => setOpen(false)}
-              href="#servicios"
-              className="block text-sm"
-            >
+            <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">
               Servicios
             </a>
-            <a
-              onClick={() => setOpen(false)}
-              href="#galeria"
-              className="block text-sm"
-            >
+            <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">
               Galería
             </a>
-            <a
-              onClick={() => setOpen(false)}
-              href="/tienda"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-sm"
-            >
+            <Link onClick={() => setOpen(false)} to="/tienda" className="block text-sm">
               Tienda
-            </a>
-            <a
-              onClick={() => setOpen(false)}
-              href="#testimonios"
-              className="block text-sm"
-            >
+            </Link>
+            <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">
               Testimonios
             </a>
-            <a
-              onClick={() => setOpen(false)}
-              href="#contacto"
-              className="block text-sm"
-            >
+            <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">
               Contacto
             </a>
-            <a
-              onClick={() => setOpen(false)}
-              href="/seguimiento"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-sm"
-            >
+            <Link onClick={() => setOpen(false)} to="/seguimiento" className="block text-sm">
               Seguimiento
-            </a>
+            </Link>
             <button
               onClick={() => {
                 setCartOpen(true);
