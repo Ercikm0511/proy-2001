@@ -12,7 +12,7 @@ import AdminSales from "@/components/admin/AdminSales";
 
 export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [tab, setTab] = useState<"inventory" | "store">("inventory");
+  const [tab, setTab] = useState<"inventory" | "store" | "clients" | "devices" | "repairs" | "sales">("inventory");
   const [showPreview, setShowPreview] = useState(true);
   const inventoryRef = useRef<HTMLDivElement | null>(null);
 
