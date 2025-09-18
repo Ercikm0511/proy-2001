@@ -17,6 +17,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsappFab from "@/components/sections/WhatsappFab";
 import { useEffect, useMemo, useState } from "react";
 import { CartProvider } from "@/state/cart";
+import { InventoryProvider } from "@/state/inventory";
 import CartPanel from "@/components/cart/CartPanel";
 import Store from "./pages/Store";
 
