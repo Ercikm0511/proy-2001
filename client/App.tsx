@@ -128,26 +128,28 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <CartProvider>
-            <div className="min-h-screen bg-background text-foreground">
-              <Header theme={theme} onToggleTheme={toggleTheme} />
-              <div className="fixed right-24 top-3 z-50 hidden md:block">
-                <CartPanel />
+            <InventoryProvider>
+              <div className="min-h-screen bg-background text-foreground">
+                <Header theme={theme} onToggleTheme={toggleTheme} />
+                <div className="fixed right-24 top-3 z-50 hidden md:block">
+                  <CartPanel />
+                </div>
+                <main>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/thanks" element={<Thanks />} />
+                    <Route path="/tienda" element={<Store />} />
+                    <Route path="/seguimiento" element={<Tracking />} />
+                    <Route path="/admin-login" element={<AdminLogin />} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </main>
+                <Footer />
+                <WhatsappFab />
               </div>
-              <main>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/thanks" element={<Thanks />} />
-                  <Route path="/tienda" element={<Store />} />
-                  <Route path="/seguimiento" element={<Tracking />} />
-                  <Route path="/admin-login" element={<AdminLogin />} />
-                  <Route path="/admin" element={<AdminDashboard />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-              <Footer />
-              <WhatsappFab />
-            </div>
+            </InventoryProvider>
           </CartProvider>
         </BrowserRouter>
       </TooltipProvider>
