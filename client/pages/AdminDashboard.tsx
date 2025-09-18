@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Services from "@/components/sections/Services";
 import Inventory from "@/components/sections/Inventory";
 import { Button } from "@/components/ui/button";
 import AdminInventory from "@/components/admin/AdminInventory";
 import AdminStore from "@/components/admin/AdminStore";
+import AdminToolbar from "@/components/admin/AdminToolbar";
 
 export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
