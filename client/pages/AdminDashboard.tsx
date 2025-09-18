@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import Services from "@/components/sections/Services";
 import Inventory from "@/components/sections/Inventory";
+import { Button } from "@/components/ui/button";
+import AdminInventory from "@/components/admin/AdminInventory";
+import AdminStore from "@/components/admin/AdminStore";
 
 export default function AdminDashboard() {
   const [ok, setOk] = useState(false);
