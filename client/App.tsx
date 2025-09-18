@@ -16,7 +16,7 @@ import WhatsappFab from "@/components/sections/WhatsappFab";
 import { useEffect, useMemo, useState } from "react";
 import { CartProvider } from "@/state/cart";
 import CartPanel from "@/components/cart/CartPanel";
-import StoreModal from "@/components/store/StoreModal";
+import Store from "./pages/Store";
 
 const queryClient = new QueryClient();
 
@@ -134,7 +134,7 @@ const App = () => {
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/thanks" element={<Thanks />} />
-                  <Route path="/tienda" element={<StoreModal />} />
+                  <Route path="/tienda" element={<Store />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
