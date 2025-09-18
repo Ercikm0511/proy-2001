@@ -25,34 +25,34 @@ export default function AdminInventory() {
 
   return (
     <div>
-      <h3 className="text-lg font-medium">Agregar producto</h3>
-      <form onSubmit={submit} className="mt-3 space-y-3">
-        <div>
-          <label className="text-sm">Nombre</label>
-          <input value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm" />
+      <h3 className="text-sm font-medium">Agregar producto</h3>
+      <form onSubmit={submit} className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-2">
+        <div className="col-span-1">
+          <label className="text-xs">Nombre</label>
+          <input value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-lg border bg-background px-2 py-2 text-sm" />
         </div>
-        <div>
-          <label className="text-sm">Precio</label>
-          <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm" />
+        <div className="col-span-1">
+          <label className="text-xs">Precio</label>
+          <input type="number" value={price} onChange={(e) => setPrice(Number(e.target.value))} className="mt-1 w-full rounded-lg border bg-background px-2 py-2 text-sm" />
         </div>
-        <div>
-          <label className="text-sm">Categoría</label>
-          <select value={category} onChange={(e) => setCategory(e.target.value as any)} className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm">
+        <div className="col-span-1">
+          <label className="text-xs">Categoría</label>
+          <select value={category} onChange={(e) => setCategory(e.target.value as any)} className="mt-1 w-full rounded-lg border bg-background px-2 py-2 text-sm">
             <option value="móviles">móviles</option>
             <option value="accesorios">accesorios</option>
           </select>
         </div>
-        <div>
-          <label className="text-sm">Imagen (URL)</label>
-          <input value={image} onChange={(e) => setImage(e.target.value)} className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm" placeholder="https://..." />
+        <div className="col-span-1">
+          <label className="text-xs">Stock</label>
+          <input type="number" value={stock} onChange={(e) => setStock(Number(e.target.value))} className="mt-1 w-full rounded-lg border bg-background px-2 py-2 text-sm" />
         </div>
-        <div>
-          <label className="text-sm">Stock</label>
-          <input type="number" value={stock} onChange={(e) => setStock(Number(e.target.value))} className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm" />
+        <div className="col-span-2">
+          <label className="text-xs">Imagen (URL)</label>
+          <input value={image} onChange={(e) => setImage(e.target.value)} className="mt-1 w-full rounded-lg border bg-background px-2 py-2 text-sm" placeholder="https://..." />
         </div>
-        {msg && <p className="text-sm text-muted-foreground">{msg}</p>}
-        <div>
-          <Button type="submit">Agregar producto</Button>
+        {msg && <p className="text-xs text-muted-foreground col-span-2">{msg}</p>}
+        <div className="col-span-2 flex justify-end">
+          <Button type="submit" size="sm">Agregar</Button>
         </div>
       </form>
     </div>
