@@ -34,16 +34,18 @@ export default function AdminDashboard() {
       <AdminToolbar currentTab={tab} onTabChange={setTab} onTogglePreview={() => setShowPreview((s) => !s)} showPreview={showPreview} />
 
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
-        <h1 className="text-2xl font-semibold">Panel Administrativo</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Puedes previsualizar y gestionar secciones clave. Para cambios avanzados, indícame qué deseas editar.</p>
+        <h1 className="text-xl font-medium">Panel administrativo</h1>
+        <p className="mt-1 text-xs text-muted-foreground">Gestión rápida y minimalista — sincronizado con la tienda pública.</p>
 
-        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="rounded-2xl border p-4">
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="rounded-xl border bg-background/50 p-3">
             {tab === "inventory" && (
               <>
-                <h2 className="text-lg font-semibold">Administrar Inventario</h2>
-                <p className="text-xs text-muted-foreground">Agrega y administra productos en el inventario.</p>
-                <div ref={inventoryRef} className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Inventario</h2>
+                  <span className="text-xs text-muted-foreground">Administrar productos</span>
+                </div>
+                <div ref={inventoryRef} className="mt-3">
                   <AdminInventory />
                 </div>
               </>
@@ -51,9 +53,11 @@ export default function AdminDashboard() {
 
             {tab === "store" && (
               <>
-                <h2 className="text-lg font-semibold">Tienda</h2>
-                <p className="text-xs text-muted-foreground">Vista y ajustes de la tienda sincronizados con el inventario.</p>
-                <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Tienda</h2>
+                  <span className="text-xs text-muted-foreground">Ajustes públicos</span>
+                </div>
+                <div className="mt-3">
                   <AdminStore />
                 </div>
               </>
@@ -61,9 +65,11 @@ export default function AdminDashboard() {
 
             {tab === "clients" && (
               <>
-                <h2 className="text-lg font-semibold">Clientes</h2>
-                <p className="text-xs text-muted-foreground">Gestión de clientes.</p>
-                <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Clientes</h2>
+                  <span className="text-xs text-muted-foreground">Contactos</span>
+                </div>
+                <div className="mt-3">
                   <AdminClients />
                 </div>
               </>
@@ -71,9 +77,11 @@ export default function AdminDashboard() {
 
             {tab === "devices" && (
               <>
-                <h2 className="text-lg font-semibold">Dispositivos</h2>
-                <p className="text-xs text-muted-foreground">Marcas y modelos.</p>
-                <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Dispositivos</h2>
+                  <span className="text-xs text-muted-foreground">Modelos</span>
+                </div>
+                <div className="mt-3">
                   <AdminDevices />
                 </div>
               </>
@@ -81,9 +89,11 @@ export default function AdminDashboard() {
 
             {tab === "repairs" && (
               <>
-                <h2 className="text-lg font-semibold">Reparaciones</h2>
-                <p className="text-xs text-muted-foreground">Historial y seguimiento de reparaciones.</p>
-                <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Reparaciones</h2>
+                  <span className="text-xs text-muted-foreground">Seguimiento</span>
+                </div>
+                <div className="mt-3">
                   <AdminRepairs />
                 </div>
               </>
@@ -91,9 +101,11 @@ export default function AdminDashboard() {
 
             {tab === "sales" && (
               <>
-                <h2 className="text-lg font-semibold">Ventas</h2>
-                <p className="text-xs text-muted-foreground">Historial de ventas y reportes.</p>
-                <div className="mt-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium">Ventas</h2>
+                  <span className="text-xs text-muted-foreground">Reportes</span>
+                </div>
+                <div className="mt-3">
                   <AdminSales />
                 </div>
               </>
@@ -101,20 +113,23 @@ export default function AdminDashboard() {
           </div>
 
           {showPreview && (
-            <div className="rounded-2xl border p-4">
-              <h2 className="text-lg font-semibold">Preview</h2>
-              <p className="text-xs text-muted-foreground">Vista previa del catálogo público.</p>
-              <div className="max-h-[60vh] overflow-auto pr-2 mt-4">
+            <div className="rounded-xl border bg-background/50 p-3">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm font-medium">Preview</h2>
+                <button className="text-xs text-muted-foreground" onClick={() => setShowPreview(false)}>Ocultar</button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">Vista previa del catálogo público.</p>
+              <div className="max-h-[60vh] overflow-auto pr-2 mt-3">
                 <Inventory />
               </div>
             </div>
           )}
         </div>
 
-        <div className="mt-8 rounded-2xl border p-4">
-          <h2 className="text-lg font-semibold">Servicios</h2>
+        <div className="mt-6 rounded-xl border bg-background/50 p-3">
+          <h2 className="text-sm font-medium">Servicios</h2>
           <p className="text-xs text-muted-foreground">Vista previa inmediata.</p>
-          <div className="mt-4">
+          <div className="mt-3">
             <Services />
           </div>
         </div>
