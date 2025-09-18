@@ -88,7 +88,6 @@ export default function AdminToolbar({
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
             <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
             <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
-            <Link onClick={() => setOpen(false)} to="/tienda" className="block text-sm">Tienda</Link>
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
             <Link onClick={() => setOpen(false)} to="/seguimiento" className="block text-sm">Seguimiento</Link>
