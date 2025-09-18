@@ -12,6 +12,7 @@ export type Product = {
 type InventoryContextValue = {
   products: Product[];
   addProduct: (p: Omit<Product, "id">) => void;
+  updateProduct: (id: string, patch: Partial<Omit<Product, "id">>) => void;
   updateStock: (id: string, qty: number) => void;
   decrementStock: (id: string, by?: number) => void;
   removeProduct: (id: string) => void;
