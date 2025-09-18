@@ -3,78 +3,22 @@ import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useCart } from "@/state/cart";
 
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  category: "móviles" | "accesorios";
-  image: string;
-};
-
-const PRODUCTS: Product[] = [
-  {
-    id: "p1",
-    name: "iPhone 13 Pro",
-    price: 16999,
-    category: "móviles",
-    image:
-      "https://images.unsplash.com/photo-1631380739856-c5b32b67fb7f?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "p2",
-    name: "Samsung Galaxy S23",
-    price: 15999,
-    category: "móviles",
-    image:
-      "https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "p3",
-    name: "Cargador 20W USB‑C",
-    price: 499,
-    category: "accesorios",
-    image:
-      "https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "p4",
-    name: "Cable Lightning trenzado",
-    price: 349,
-    category: "accesorios",
-    image:
-      "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "p7",
-    name: "Case MagSafe",
-    price: 699,
-    category: "accesorios",
-    image:
-      "https://images.unsplash.com/photo-1601435119439-c1f5f950b35e?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    id: "p8",
-    name: "Pixel 8 Pro",
-    price: 17499,
-    category: "móviles",
-    image:
-      "https://images.unsplash.com/photo-1603808033070-24bb34d4a703?q=80&w=1200&auto=format&fit=crop",
-  },
-];
-
 import { RefObject } from "react";
+import { useInventory } from "@/state/inventory";
 
 export default function Inventory({ cartTargetRef }: { cartTargetRef?: RefObject<HTMLElement | SVGElement | HTMLButtonElement | null> } = {}) {
   const [query, setQuery] = useState("");
-  const [cat, setCat] = useState<"todos" | Product["category"]>("todos");
+  const [cat, setCat] = useState<"todos" | "móviles" | "accesorios">("todos");
+
+  const { products, decrementStock } = useInventory();
 
   const filtered = useMemo(() => {
-    return PRODUCTS.filter((p) => {
+    return products.filter((p) => {
       const matchesCat = cat === "todos" || p.category === cat;
       const matchesQuery = p.name.toLowerCase().includes(query.toLowerCase());
       return matchesCat && matchesQuery;
     });
-  }, [query, cat]);
+  }, [query, cat, products]);
 
   const { add } = useCart();
 
