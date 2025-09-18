@@ -1,24 +1,15 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
 import { useNavigate } from "react-router-dom";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import TrackingModal from "@/components/sections/TrackingModal";
+import Button from "@/components/ui/button";
 
 type Props = { theme: "light" | "dark"; onToggleTheme: () => void };
 
 export default function Header({ theme, onToggleTheme }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
-  const [trackOpen, setTrackOpen] = useState(false);
   const { items, setOpen: setCartOpen } = useCart();
   const navigate = useNavigate();
 
@@ -38,13 +29,15 @@ export default function Header({ theme, onToggleTheme }: Props) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setLoginOpen(true)}
+          <a
+            href="/admin-login"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Abrir inicio de sesión"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary"
           >
             <Smartphone className="h-5 w-5" />
-          </button>
+          </a>
           <button
             onClick={() => (window.location.href = "/")}
             className="text-lg font-semibold tracking-tight"
@@ -67,6 +60,8 @@ export default function Header({ theme, onToggleTheme }: Props) {
           </a>
           <a
             href="/tienda"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground"
           >
             Tienda
@@ -77,12 +72,14 @@ export default function Header({ theme, onToggleTheme }: Props) {
           >
             Testimonios
           </a>
-          <button
-            onClick={() => setTrackOpen(true)}
+          <a
+            href="/seguimiento"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-muted-foreground transition hover:text-foreground"
           >
             Seguimiento
-          </button>
+          </a>
           <a
             href="#contacto"
             className="text-sm text-muted-foreground hover:text-foreground"
@@ -126,31 +123,12 @@ export default function Header({ theme, onToggleTheme }: Props) {
           <Menu className="h-6 w-6" />
         </button>
       </div>
-      {/* Login Modal */}
-      <Dialog open={loginOpen} onOpenChange={setLoginOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Iniciar Sesión (Administración)</DialogTitle>
-          </DialogHeader>
-          <LoginForm
-            onSuccess={() => {
-              setLoginOpen(false);
-              navigate("/admin");
-            }}
-          />
-        </DialogContent>
-      </Dialog>
-
-      {/* Tracking Modal */}
-      <TrackingModal open={trackOpen} onOpenChange={setTrackOpen} />
 
       {open && (
         <div className="md:hidden">
           <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm">
-                Modo {theme === "dark" ? "Noche" : "Día"}
-              </span>
+              <span className="text-sm">Modo {theme === "dark" ? "Noche" : "Día"}</span>
               <button
                 onClick={() => {
                   onToggleTheme();
@@ -183,6 +161,8 @@ export default function Header({ theme, onToggleTheme }: Props) {
             <a
               onClick={() => setOpen(false)}
               href="/tienda"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block text-sm"
             >
               Tienda
@@ -201,15 +181,15 @@ export default function Header({ theme, onToggleTheme }: Props) {
             >
               Contacto
             </a>
-            <button
-              onClick={() => {
-                setTrackOpen(true);
-                setOpen(false);
-              }}
-              className="block w-full text-left text-sm"
+            <a
+              onClick={() => setOpen(false)}
+              href="/seguimiento"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-sm"
             >
               Seguimiento
-            </button>
+            </a>
             <button
               onClick={() => {
                 setCartOpen(true);
@@ -226,54 +206,5 @@ export default function Header({ theme, onToggleTheme }: Props) {
         </div>
       )}
     </header>
-  );
-}
-
-function LoginForm({ onSuccess }: { onSuccess: () => void }) {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  return (
-    <form
-      className="space-y-3"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (email === "Mestore1204@gmail.com" && pass === "St0r3.1204") {
-          localStorage.setItem("isAdmin", "true");
-          setError(null);
-          onSuccess();
-        } else {
-          setError("Credenciales inválidas");
-        }
-      }}
-    >
-      <div>
-        <label className="text-sm">Correo</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm outline-none ring-primary/30 focus:ring-2"
-          required
-        />
-      </div>
-      <div>
-        <label className="text-sm">Contraseña</label>
-        <input
-          type="password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          className="mt-1 w-full rounded-xl border bg-background px-3 py-2 text-sm outline-none ring-primary/30 focus:ring-2"
-          required
-        />
-      </div>
-      {error && <p className="text-sm text-red-500">{error}</p>}
-      <Button type="submit" className="w-full">
-        Entrar
-      </Button>
-      <p className="text-xs text-muted-foreground">
-        Acceso administrativo. No compartas estas credenciales.
-      </p>
-    </form>
   );
 }
