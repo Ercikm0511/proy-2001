@@ -67,9 +67,6 @@ export default function AdminToolbar({
             {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
           </button>
 
-          <button onClick={() => navigate("/tienda")} aria-label="Abrir tienda" className="relative rounded-full border bg-background/60 p-2 text-muted-foreground">
-            <ShoppingCart className="h-4 w-4" />
-          </button>
 
           <div className="hidden md:flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={() => alert("Función de importar/exportar no implementada")}>Import/Export</Button>
