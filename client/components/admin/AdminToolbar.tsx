@@ -1,5 +1,8 @@
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 
 export default function AdminToolbar({
   currentTab,
@@ -15,49 +18,87 @@ export default function AdminToolbar({
   showPreview: boolean;
 }) {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() => (typeof window !== "undefined" && (localStorage.getItem("theme") as "light" | "dark")) || "light");
 
   const logout = () => {
     localStorage.removeItem("isAdmin");
     window.location.href = "/";
   };
 
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    try {
+      const root = document.documentElement;
+      if (next === "dark") root.classList.add("dark");
+      else root.classList.remove("dark");
+      localStorage.setItem("theme", next);
+    } catch (e) {}
+  };
+
   return (
-    <div className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur py-2">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
+    <header className={cn("fixed inset-x-0 top-0 z-50 transition-all bg-background/80 backdrop-blur")}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <button
-              className={`rounded-md px-3 py-1 ${currentTab === "inventory" ? "bg-primary text-primary-foreground" : "border"}`}
-              onClick={() => onTabChange("inventory")}
-            >
+          <a href="/admin-login" aria-label="Abrir inicio de sesión" className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Smartphone className="h-5 w-5" />
+          </a>
+          <button onClick={() => (window.location.href = "/")} className="text-lg font-semibold tracking-tight" aria-label="Ir al menú principal">
+            M’E Store
+          </button>
+
+          <nav className="hidden ml-6 items-center gap-4 md:flex">
+            <button className={cn("rounded-md px-3 py-1", currentTab === "inventory" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("inventory")}>
               Inventario
             </button>
-            <button
-              className={`rounded-md px-3 py-1 ${currentTab === "store" ? "bg-primary text-primary-foreground" : "border"}`}
-              onClick={() => onTabChange("store")}
-            >
+            <button className={cn("rounded-md px-3 py-1", currentTab === "store" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("store")}>
               Tienda
             </button>
+            <Link to="/tienda" className="text-sm text-muted-foreground hover:text-foreground">Ver tienda</Link>
+          </nav>
+
+          <div className="ml-4 hidden md:block">
+            <Button size="sm" onClick={onAddClick}>Agregar producto</Button>
           </div>
-
-          <Button size="sm" onClick={onAddClick}>Agregar producto</Button>
-
-          <Button size="sm" variant="outline" onClick={() => navigate("/tienda")}>Ver tienda</Button>
-
-          <Button size="sm" variant="ghost" onClick={onTogglePreview}>
-            {showPreview ? "Ocultar preview" : "Mostrar preview"}
-          </Button>
         </div>
 
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" onClick={() => alert("Función de importar/exportar no implementada")}>Import/Export</Button>
-          <Button size="sm" variant="ghost" onClick={() => navigate("/admin/users")}>Usuarios</Button>
+          <button onClick={toggleTheme} aria-label="Cambiar tema" className="rounded-full border bg-background/60 p-2 text-muted-foreground transition hover:text-foreground">
+            {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+          </button>
 
-          <Button size="sm" variant="destructive" onClick={logout}>
-            Cerrar sesión
-          </Button>
+          <button onClick={() => navigate("/tienda")} aria-label="Abrir tienda" className="relative rounded-full border bg-background/60 p-2 text-muted-foreground">
+            <ShoppingCart className="h-4 w-4" />
+          </button>
+
+          <div className="hidden md:flex items-center gap-2">
+            <Button size="sm" variant="outline" onClick={() => alert("Función de importar/exportar no implementada")}>Import/Export</Button>
+            <Button size="sm" variant="ghost" onClick={() => navigate("/admin/users")}>Usuarios</Button>
+            <Button size="sm" variant="destructive" onClick={logout}>Cerrar sesión</Button>
+          </div>
+
+          <button className="md:hidden" aria-label="Abrir menú" onClick={() => setOpen((v) => !v)}>
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
       </div>
-    </div>
+
+      {open && (
+        <div className="md:hidden">
+          <div className="glass mx-4 mb-4 space-y-2 rounded-xl p-4">
+            <a onClick={() => setOpen(false)} href="#servicios" className="block text-sm">Servicios</a>
+            <a onClick={() => setOpen(false)} href="#galeria" className="block text-sm">Galería</a>
+            <Link onClick={() => setOpen(false)} to="/tienda" className="block text-sm">Tienda</Link>
+            <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
+            <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
+            <Link onClick={() => setOpen(false)} to="/seguimiento" className="block text-sm">Seguimiento</Link>
+            <Button className="w-full mt-2" asChild>
+              <a href="#contacto">Agenda tu reparación</a>
+            </Button>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }
