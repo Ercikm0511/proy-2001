@@ -70,7 +70,6 @@ export default function AdminToolbar({
 
           <div className="hidden md:flex items-center gap-2">
             <Button size="sm" variant="outline" onClick={() => alert("Función de importar/exportar no implementada")}>Import/Export</Button>
-            <Button size="sm" variant="ghost" onClick={() => navigate("/admin/users")}>Usuarios</Button>
             <Button size="sm" variant="destructive" onClick={logout}>Cerrar sesión</Button>
           </div>
 
