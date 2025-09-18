@@ -99,6 +99,10 @@ export default function AdminToolbar({
             <a onClick={() => setOpen(false)} href="#testimonios" className="block text-sm">Testimonios</a>
             <a onClick={() => setOpen(false)} href="#contacto" className="block text-sm">Contacto</a>
             <Link onClick={() => setOpen(false)} to="/seguimiento" className="block text-sm">Seguimiento</Link>
+            <button onClick={() => { onTabChange("clients"); setOpen(false); }} className="block text-sm">Clientes</button>
+            <button onClick={() => { onTabChange("devices"); setOpen(false); }} className="block text-sm">Dispositivos</button>
+            <button onClick={() => { onTabChange("repairs"); setOpen(false); }} className="block text-sm">Reparaciones</button>
+            <button onClick={() => { onTabChange("sales"); setOpen(false); }} className="block text-sm">Ventas</button>
             <Button className="w-full mt-2" asChild>
               <a href="#contacto">Agenda tu reparación</a>
             </Button>
