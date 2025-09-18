@@ -18,6 +18,10 @@ import WhatsappFab from "@/components/sections/WhatsappFab";
 import { useEffect, useMemo, useState } from "react";
 import { CartProvider } from "@/state/cart";
 import { InventoryProvider } from "@/state/inventory";
+import { ClientsProvider } from "@/state/clients";
+import { DevicesProvider } from "@/state/devices";
+import { RepairsProvider } from "@/state/repairs";
+import { SalesProvider } from "@/state/sales";
 import CartPanel from "@/components/cart/CartPanel";
 import Store from "./pages/Store";
 
