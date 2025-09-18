@@ -14,15 +14,15 @@ export default function Header({ theme, onToggleTheme }: Props) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Hide header when viewing admin panel
-  if (location.pathname === "/admin" || location.pathname.startsWith("/admin/")) return null;
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Hide header when viewing admin panel
+  if (location.pathname === "/admin" || location.pathname.startsWith("/admin/")) return null;
 
   return (
     <header
