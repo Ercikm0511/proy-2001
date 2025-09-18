@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Menu, Smartphone, Moon, Sun, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/state/cart";
