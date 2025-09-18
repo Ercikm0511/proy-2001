@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import AdminInventory from "@/components/admin/AdminInventory";
 import AdminStore from "@/components/admin/AdminStore";
 import AdminToolbar from "@/components/admin/AdminToolbar";
+import AdminClients from "@/components/admin/AdminClients";
+import AdminDevices from "@/components/admin/AdminDevices";
+import AdminRepairs from "@/components/admin/AdminRepairs";
+import AdminSales from "@/components/admin/AdminSales";
 
 export default function AdminDashboard() {
   const [isAdmin, setIsAdmin] = useState(false);
