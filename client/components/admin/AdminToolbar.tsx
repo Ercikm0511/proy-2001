@@ -55,6 +55,18 @@ export default function AdminToolbar({
             <button className={cn("rounded-md px-3 py-1", currentTab === "store" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("store")}>
               Tienda
             </button>
+            <button className={cn("rounded-md px-3 py-1", currentTab === "clients" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("clients")}>
+              Clientes
+            </button>
+            <button className={cn("rounded-md px-3 py-1", currentTab === "devices" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("devices")}>
+              Dispositivos
+            </button>
+            <button className={cn("rounded-md px-3 py-1", currentTab === "repairs" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("repairs")}>
+              Reparaciones
+            </button>
+            <button className={cn("rounded-md px-3 py-1", currentTab === "sales" ? "bg-primary text-primary-foreground" : "border")} onClick={() => onTabChange("sales")}>
+              Ventas
+            </button>
           </nav>
 
           <div className="ml-4 hidden md:block">
