@@ -86,7 +86,9 @@ export default function Inventory({ cartTargetRef }: { cartTargetRef?: RefObject
                   size="sm"
                   className="shine-on-hover"
                   onClick={(e) => {
+                    if (p.stock <= 0) return;
                     add({ id: p.id, name: p.name, price: p.price, image: p.image });
+                    decrementStock(p.id, 1);
                     const target = cartTargetRef?.current as HTMLElement | SVGElement | null;
                     const fromEl = (e.currentTarget?.closest(".group") as HTMLElement) || (e.currentTarget as HTMLElement);
                     if (!target || !fromEl) return;
@@ -113,8 +115,9 @@ export default function Inventory({ cartTargetRef }: { cartTargetRef?: RefObject
                       { transform: `translate(${dx}px, ${dy}px) scale(${scale})`, opacity: 0.3 },
                     ], { duration: 650, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }).onfinish = () => clone.remove();
                   }}
+                  disabled={p.stock <= 0}
                 >
-                  Agregar al carrito
+                  {p.stock > 0 ? "Agregar al carrito" : "Sin stock"}
                 </Button>
                 <Button size="sm" variant="outline">
                   Detalles
