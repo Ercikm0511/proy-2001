@@ -45,7 +45,7 @@ export default function AdminDashboard() {
 
         <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="rounded-2xl border p-4">
-            {tab === "inventory" ? (
+            {tab === "inventory" && (
               <>
                 <h2 className="text-lg font-semibold">Administrar Inventario</h2>
                 <p className="text-xs text-muted-foreground">Agrega y administra productos en el inventario.</p>
@@ -53,12 +53,54 @@ export default function AdminDashboard() {
                   <AdminInventory />
                 </div>
               </>
-            ) : (
+            )}
+
+            {tab === "store" && (
               <>
                 <h2 className="text-lg font-semibold">Tienda</h2>
                 <p className="text-xs text-muted-foreground">Vista y ajustes de la tienda sincronizados con el inventario.</p>
                 <div className="mt-4">
                   <AdminStore />
+                </div>
+              </>
+            )}
+
+            {tab === "clients" && (
+              <>
+                <h2 className="text-lg font-semibold">Clientes</h2>
+                <p className="text-xs text-muted-foreground">Gestión de clientes.</p>
+                <div className="mt-4">
+                  <AdminClients />
+                </div>
+              </>
+            )}
+
+            {tab === "devices" && (
+              <>
+                <h2 className="text-lg font-semibold">Dispositivos</h2>
+                <p className="text-xs text-muted-foreground">Marcas y modelos.</p>
+                <div className="mt-4">
+                  <AdminDevices />
+                </div>
+              </>
+            )}
+
+            {tab === "repairs" && (
+              <>
+                <h2 className="text-lg font-semibold">Reparaciones</h2>
+                <p className="text-xs text-muted-foreground">Historial y seguimiento de reparaciones.</p>
+                <div className="mt-4">
+                  <AdminRepairs />
+                </div>
+              </>
+            )}
+
+            {tab === "sales" && (
+              <>
+                <h2 className="text-lg font-semibold">Ventas</h2>
+                <p className="text-xs text-muted-foreground">Historial de ventas y reportes.</p>
+                <div className="mt-4">
+                  <AdminSales />
                 </div>
               </>
             )}
